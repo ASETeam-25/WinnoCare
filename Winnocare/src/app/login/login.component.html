@@ -1,0 +1,15 @@
+<div class="content">
+  <div class="login-container">
+    <ion-img src="assets\img\winnovateSystemsLogo.png" class="center"></ion-img>
+    <ion-item>
+      <ion-label class="label">Username</ion-label>
+      <ion-input [(ngModel)]="username" type="text" placeholder="Enter username" />
+    </ion-item>
+    <ion-item>
+      <ion-label class="label">Password</ion-label>
+      <ion-input [(ngModel)]="password" type="password" placeholder="Enter password" />
+    </ion-item>
+    <ion-button (click)="login()" expand="block" size="large">Login</ion-button>
+    <ion-button (click)="register()" expand="block" size="large">Register</ion-button>
+  </div>
+</div>

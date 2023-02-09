@@ -1,0 +1,11 @@
+.content {
+    height:100%;
+    width:100%;
+}
+
+.medicine-tracker-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:inherit;
+}

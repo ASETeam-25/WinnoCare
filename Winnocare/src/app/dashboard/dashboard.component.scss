@@ -1,0 +1,15 @@
+.content {
+    height:100%;
+    width:100%;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:inherit;
+}
+
+.dashboard-actions {
+    margin-bottom: 20px;
+}

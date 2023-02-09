@@ -3,32 +3,31 @@
     <h1 class="textDecor" style="text-align: center;">Personal Details</h1>
     <ion-item>
       <ion-label position="fixed" class="textDecor">Name</ion-label>
-      <ion-input [(ngModel)]="name" type="text" placeholder="Enter full name" />
+      <ion-input [(ngModel)]="name" type="text" placeholder="Enter full name" required />
     </ion-item>
     <ion-item>
       <ion-label position="fixed" class="textDecor">Age</ion-label>
-      <ion-input [(ngModel)]="age" type="number" placeholder="Enter your age" />
+      <ion-input [(ngModel)]="age" type="number" placeholder="Enter your age" required/>
     </ion-item>
     <ion-item>
       <ion-label position="fixed" class="textDecor">Gender</ion-label>
-      <ion-input [(ngModel)]="gender" type="text" placeholder="Enter your gender" />
+      <ion-input [(ngModel)]="gender" type="text" placeholder="Enter your gender" required/>
     </ion-item>
     <ion-list>
       <ion-item>
         <ion-label position="fixed" class="textDecor">Country</ion-label>
-        <ion-select placeholder="Select your country">
-          <ng-template *ngFor="let country of countryList">
-            <ion-select-option >country.name</ion-select-option>
+        <ion-select placeholder="Select your country" >
+          <ng-template *ngFor="let country of countryList" >
+            <ion-select-option>country.name</ion-select-option>
           </ng-template>
         </ion-select>
       </ion-item>
     </ion-list>
     <ion-item>
       <ion-label position="fixed" class="textDecor">Phone</ion-label>
-      <ion-input [(ngModel)]="contact" type="text" placeholder="Enter your contact number" />
+      <ion-input [(ngModel)]="contact" type="text" placeholder="Enter your contact number" required/>
     </ion-item>
 
     <ion-button (click)="next()" expand="block" size="large">Next</ion-button>
-
   </div>
 </div>

@@ -8,4 +8,18 @@
     flex-direction: column;
     justify-content: center;
     height:inherit;
+    row-gap: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.label {
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.textDecor {
+  padding-right: 10px;
+  font-weight: bold;
+  color: cornflowerblue;
 }

@@ -1,20 +1,22 @@
 <div class="content">
   <div class="medicine-details-container">
     <h1 class="textDecor" style="text-align: center;">Medicine Dosage Details</h1>
-    <div>
-      <ion-label class="textDecor" position="fixed">Medicine Name</ion-label>
-      <ion-input type="text" placeholder="Enter medicine name" />
-    </div>
-    <div>
-      <ion-label class="textDecor" position="fixed">Frequency</ion-label>
-      <ion-input type="text" placeholder="Enter Frequency" />
-    </div>
-    <div>
-      <ion-label class="textDecor" position="fixed">Expiry Date</ion-label>
-      <ion-input type="Date" placeholder="Enter expiry Date" />
-    </div>
 
-    <ion-button (click)="done()" expand="block" size="large">Done</ion-button>
+    <form [formGroup]="medicineDetailsForm" (ngSubmit)="validateForm(medicineDetailsForm)">
+      <div>
+        <ion-label class="textDecor" position="fixed">Medicine Name</ion-label>
+        <ion-input formControlName="name" type="text" placeholder="Enter medicine name" />
+      </div>
+      <div>
+        <ion-label class="textDecor" position="fixed">Duration</ion-label>
+        <ion-input formControlName="duration" type="text" placeholder="Enter Duration" />
+      </div>
+      <div>
+        <ion-label class="textDecor" position="fixed">Expiry Date</ion-label>
+        <ion-input formControlName="expiry" type="Date" placeholder="Enter expiry Date" />
+      </div>
 
+      <ion-button type="submit" expand="block" size="large">Done</ion-button>
+    </form>
   </div>
 </div>

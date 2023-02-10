@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-import { ToastPosition } from '@ionic/core';
 import * as countries from '../../../assets/json/countries.json';
 
 @Component({
@@ -11,35 +10,43 @@ import * as countries from '../../../assets/json/countries.json';
 })
 export class PersonalDetailsComponent implements OnInit {
 
-  name: any;
-  age: any;
-  gender: any;
-  country: any;
-  contact: any;
+  personalDetailsForm: FormGroup;
   countryList: { name: string, dial_code: string, code: string }[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private toastController: ToastController) { }
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.personalDetailsForm = this.fb.group({
+      name: ['', Validators.required],
+      age: ['', Validators.required],
+      gender: ['', Validators.required],
+      country: ['', Validators.required],
+      contact: ['', Validators.required],
+    });
+
     fetch('assets/json/countries.json').then(res => res.json())
       .then(jsonData => {
         this.countryList = jsonData;
       });
   }
 
-  next() {
-    this.router.navigate(['register/emergencyContacts']);
-
-
+  validateForm(form: FormGroup) {
+    console.log('Valid?', form.valid);
+    if (form.valid) {
+      this.router.navigate(['register/medicineDetails']);
+    } else {
+      this.validateAllFormFields(form);
+    }
   }
 
-  async showToast(position: ToastPosition, message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 1500,
-      position: position
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
     });
-    await toast.present();
   }
-
 }

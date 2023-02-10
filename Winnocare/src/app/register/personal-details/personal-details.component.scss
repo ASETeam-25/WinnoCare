@@ -1,3 +1,16 @@
+ion-item {
+    margin-top: 15px;
+}
+
+ion-button {
+    margin-top: 30px;
+}
+
+ion-select {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
 .content {
     height: 100%;
     width: 100%;
@@ -15,7 +28,7 @@
 
 .flex-row {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     column-gap: 20px;
 }
@@ -23,4 +36,8 @@
 .textDecor {
     font-weight: bold;
     color: cornflowerblue;
+}
+
+.error-label {
+    height: 10px;
 }

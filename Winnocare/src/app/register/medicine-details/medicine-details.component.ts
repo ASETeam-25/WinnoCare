@@ -24,8 +24,8 @@ export class MedicineDetailsComponent implements OnInit {
   }
 
   validateForm(form: FormGroup) {
+    console.log('Valid?', form.valid);
     if (form.valid) {
-
       this.router.navigate(['login']);
     } else {
       this.validateAllFormFields(form);

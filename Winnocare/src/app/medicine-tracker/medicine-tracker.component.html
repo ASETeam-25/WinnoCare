@@ -3,18 +3,15 @@
 
     <h1 class="textDecor" style="text-align: center;">Medicine Tracker</h1>
     <div>
-      <ion-label class="textDecor" position="fixed">Medicine Name</ion-label>
-      <ion-input type="text" placeholder="Enter medicine name" />
-    </div>
-    <div>
-      <ion-label class="textDecor" position="fixed">Duration</ion-label>
-      <ion-input type="text" placeholder="Enter Duration" />
-    </div>
-    <div>
-      <ion-label class="textDecor" position="fixed">Expiry Date</ion-label>
-      <ion-input type="Date" placeholder="Enter expiry Date" />
+      <ion-list>
+        <ion-item>
+          <ion-label>Combiflame</ion-label>
+          <ion-toggle slot="end" [checked]="false"></ion-toggle>
+        </ion-item>
+      </ion-list>
     </div>
 
+    <ion-button (click)="AddNewMedicine()" expand="block" size="large">Add New Medicine</ion-button>
 
   </div>
 </div>

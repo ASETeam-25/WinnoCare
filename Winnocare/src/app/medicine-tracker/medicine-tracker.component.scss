@@ -8,4 +8,15 @@
     flex-direction: column;
     justify-content: center;
     height:inherit;
+    row-gap: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+ion-toggle {
+  zoom: 0.6;
+}
+
+.btnAddNewMedicine{
+bottom: 0%;
 }

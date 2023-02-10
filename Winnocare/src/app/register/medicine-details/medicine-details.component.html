@@ -4,16 +4,42 @@
 
     <form [formGroup]="medicineDetailsForm" (ngSubmit)="validateForm(medicineDetailsForm)">
       <div>
-        <ion-label class="textDecor" position="fixed">Medicine Name</ion-label>
-        <ion-input formControlName="name" type="text" placeholder="Enter medicine name" />
+        <ion-item>
+          <ion-label text-wrap class="textDecor" position="fixed">Medicine Name</ion-label>
+          <ion-input formControlName="name" type="text" placeholder="Enter medicine name" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="medicineDetailsForm.get('name')?.invalid && (medicineDetailsForm.get('name')?.dirty || medicineDetailsForm.get('name')?.touched)">
+            Please enter medicine name.
+          </div>
+        </div>
       </div>
       <div>
+        <ion-item>
         <ion-label class="textDecor" position="fixed">Duration</ion-label>
         <ion-input formControlName="duration" type="text" placeholder="Enter Duration" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('duration')?.invalid && (medicineDetailsForm.get('duration')?.dirty || medicineDetailsForm.get('duration')?.touched)">
+          Please enter medicine name.
+        </div>
+      </div>
+
       </div>
       <div>
-        <ion-label class="textDecor" position="fixed">Expiry Date</ion-label>
+      <ion-item>
+        <ion-label text-wrap class="textDecor" position="fixed">Expiry Date</ion-label>
         <ion-input formControlName="expiry" type="Date" placeholder="Enter expiry Date" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="medicineDetailsForm.get('expiry')?.invalid && (medicineDetailsForm.get('expiry')?.dirty || medicineDetailsForm.get('expiry')?.touched)">
+            Please enter medicine name.
+          </div>
+        </div>
+
       </div>
 
       <ion-button type="submit" expand="block" size="large">Done</ion-button>

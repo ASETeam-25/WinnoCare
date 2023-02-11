@@ -2,16 +2,21 @@
   <div class="medicine-tracker-container">
 
     <h1 class="textDecor" style="text-align: center;">Medicine Tracker</h1>
-    <div>
+    <ion-content>
+      <ion-label *ngIf="existingDosage.length == 0">No Data available. Please add your medicine dosage.</ion-label>
       <ion-list>
-        <ion-item>
-          <ion-label>Combiflame</ion-label>
-          <ion-toggle slot="end" [checked]="false"></ion-toggle>
+        <ion-item *ngFor="let item of existingDosage; let i = index">
+          <ion-label>{{item.name}}</ion-label>
+          <div slot="end" style="display: inherit;">
+            <ion-label>Not Taken</ion-label>
+            <ion-toggle [checked]="item.taken" (ionChange)="medicineTaken(item)" color="success"></ion-toggle>
+            <ion-label>Taken</ion-label>
+          </div>
         </ion-item>
       </ion-list>
-    </div>
+    </ion-content>
 
-    <ion-button (click)="AddNewMedicine()" expand="block" size="large">Add New Medicine</ion-button>
+    <ion-button (click)="addNewMedicine()" expand="block" size="large">Add New Medicine</ion-button>
 
   </div>
 </div>

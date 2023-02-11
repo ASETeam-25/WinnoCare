@@ -1,22 +1,42 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+
+const STORAGE_KEY = 'dosage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  private _storage: Storage | null = null;
-
   constructor(private storage: Storage) {
     this.init();
   }
 
   async init() {
-    const storage = await this.storage.create();
-    this._storage = storage;
+    await this.storage.create();
   }
 
-  public set(key: string, value: any) {
-    this._storage?.set(key, value);
+  async addDosage(item: any) {
+    const storedData = await this.storage.get(STORAGE_KEY) || [];
+    storedData.push(item);
+    return await this.storage.set(STORAGE_KEY, storedData);
+  }
+
+  async getDosage() {
+    return await this.storage.get(STORAGE_KEY) || [];
+  }
+
+  async updateDosage(item: any) { 
+    let newItems: any = [];
+    const storedData = await this.storage.get(STORAGE_KEY) || [];
+    for(let index of storedData){
+      if (index.name === item.name) {
+        newItems.push(item);
+      } else {
+        newItems.push(index);
+      }
+    }
+
+    return await this.storage.set(STORAGE_KEY, newItems);
   }
 }

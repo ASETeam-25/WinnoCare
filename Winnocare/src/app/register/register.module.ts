@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage-angular';
+import { StorageService } from '../services/storage.service';
 import { EmergencyContactsComponent } from './emergency-contacts/emergency-contacts.component';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
@@ -16,8 +16,8 @@ import { RegisterRoutingModule } from './register-routing.module';
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    IonicStorageModule.forRoot(),
     RegisterRoutingModule
-  ]
+  ],
+  providers: [StorageService]
 })
 export class RegisterModule { }

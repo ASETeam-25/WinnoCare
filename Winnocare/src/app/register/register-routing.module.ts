@@ -7,7 +7,7 @@ import { PersonalDetailsComponent } from './personal-details/personal-details.co
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'personalDetails',
+    redirectTo: 'medicineDetails',
     pathMatch: 'full',
   },
   {

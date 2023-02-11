@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -11,22 +11,29 @@ import { StorageService } from 'src/app/services/storage.service';
 export class MedicineDetailsComponent implements OnInit {
 
   medicineDetailsForm: FormGroup;
-  private _storage: Storage | null = null;
+  existingDosage = [];
 
-  constructor(private router: Router, private fb: FormBuilder) { }
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private storageService: StorageService) { }
 
   ngOnInit() {
     this.medicineDetailsForm = this.fb.group({
       name: ['', Validators.required],
       duration: ['', Validators.required],
-      expiry: ['', Validators.required]
-    })
+      expiry: ['', Validators.required],
+      taken: [false]
+    });
   }
 
-  validateForm(form: FormGroup) {
+  async validateForm(form: FormGroup) {
     console.log('Valid?', form.valid);
+    console.log("Value", this.medicineDetailsForm.value);
     if (form.valid) {
-      this.router.navigate(['login']);
+      await this.storageService.addDosage(this.medicineDetailsForm.value);
+      if (this.route.snapshot.paramMap.get('previousUrl') == "medicineTracker") {
+        this.router.navigate(['medicineTracker']);
+      } else {
+        this.router.navigate(['login']);
+      }
     } else {
       this.validateAllFormFields(form);
     }

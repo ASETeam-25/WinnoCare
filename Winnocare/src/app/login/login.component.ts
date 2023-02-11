@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { ToastPosition } from '@ionic/core';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -17,9 +17,18 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthenticationService,
-    private toastController: ToastController) { }
+    private toastController: ToastController,
+    public menuCtrl: MenuController) { }
 
   ngOnInit() { }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuCtrl.enable(true);
+  }
 
   login() {
     this.authService.login(this.username, this.password).then(() => {

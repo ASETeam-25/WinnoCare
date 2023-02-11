@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-medicine-tracker',
@@ -7,8 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicineTrackerComponent implements OnInit {
 
-  constructor() { }
+  name: string;
+  existingDosage: any = [];
 
-  ngOnInit() {}
+  constructor(private router: Router, private storageService: StorageService) { }
+
+  ngOnInit() { }
+
+  ionViewWillEnter() {
+    this.loadData();
+  }
+
+  async loadData() {
+    this.existingDosage = await this.storageService.getDosage();
+  }
+
+  addNewMedicine() {
+    this.router.navigate(['register/medicineDetails', { previousUrl: 'medicineTracker' }]);
+  }
+
+  medicineTaken(item: any) {
+    item.taken = !item.taken;
+    this.storageService.updateDosage(item);
+  }
 
 }

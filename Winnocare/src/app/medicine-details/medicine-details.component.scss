@@ -1,9 +1,15 @@
+
 ion-item {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 ion-button {
-    margin-top: 30px;
+  margin-top: 30px;
+}
+
+ion-select {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .content {
@@ -11,14 +17,14 @@ ion-button {
     width: 100%;
 }
 
-.emergency-details-container {
+.medicine-details-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: inherit;
-    row-gap: 20px;
     padding-left: 15px;
     padding-right: 15px;
+    row-gap: 20px;
 }
 
 .textDecor {
@@ -27,6 +33,6 @@ ion-button {
 }
 
 .error-label {
-    height: 10px;
-    color: red;
+  height: 10px;
+  color: red;
 }

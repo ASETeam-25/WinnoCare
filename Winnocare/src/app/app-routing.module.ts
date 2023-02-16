@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DoctorBookingsComponent } from './doctor-bookings/doctor-bookings.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { MedicineTrackerComponent } from './medicine-tracker/medicine-tracker.component';
 
 const routes: Routes = [
@@ -17,6 +19,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard]
@@ -24,6 +30,11 @@ const routes: Routes = [
   {
     path: 'doctorBookings',
     component: DoctorBookingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'medicineDetails',
+    component: MedicineDetailsComponent,
     canActivate: [AuthGuard]
   },
   {

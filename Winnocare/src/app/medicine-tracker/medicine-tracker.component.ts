@@ -25,7 +25,7 @@ export class MedicineTrackerComponent implements OnInit {
   }
 
   addNewMedicine() {
-    this.router.navigate(['register/medicineDetails', { previousUrl: 'medicineTracker' }]);
+    this.router.navigate(['medicineDetails', { previousUrl: 'medicineTracker' }]);
   }
 
   medicineTaken(item: any) {

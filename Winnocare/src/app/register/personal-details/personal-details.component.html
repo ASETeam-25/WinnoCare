@@ -1,67 +1,117 @@
 <div class="content">
   <div class="personal-details-container">
     <h1 class="textDecor" style="text-align: center;">Personal Details</h1>
-    <form [formGroup]="personalDetailsForm" (ngSubmit)="validateForm(personalDetailsForm)">
-      <ion-item>
-        <ion-label position="fixed" class="textDecor">Name</ion-label>
-        <ion-input formControlName="name" type="text" placeholder="Enter full name" />
-      </ion-item>
-      <div class="error-label">
-        <div
-          *ngIf="personalDetailsForm.get('name')?.invalid && (personalDetailsForm.get('name')?.dirty || personalDetailsForm.get('name')?.touched)">
-          Please provide a name.
-        </div>
-      </div>
-      <ion-item>
-        <ion-label position="fixed" class="textDecor">Age</ion-label>
-        <ion-input formControlName="age" type="number" placeholder="Enter your age" />
-      </ion-item>
-      <div class="error-label">
-        <div
-          *ngIf="personalDetailsForm.get('age')?.invalid && (personalDetailsForm.get('age')?.dirty || personalDetailsForm.get('age')?.touched)">
-          Please provide your age.
-        </div>
-      </div>
-      <ion-item>
-        <ion-label position="fixed" class="textDecor">Gender</ion-label>
-        <ion-select placeholder="Select your gender" formControlName="gender">
-          <ion-select-option value="Male">Male</ion-select-option>
-          <ion-select-option value="Female">Female</ion-select-option>
-          <ion-select-option value="Other">Other</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div class="error-label">
-        <div
-          *ngIf="personalDetailsForm.get('gender')?.invalid && (personalDetailsForm.get('gender')?.dirty || personalDetailsForm.get('gender')?.touched)">
-          Please select your gender.
-        </div>
-      </div>
+    <ion-content>
+      <form [formGroup]="personalDetailsForm" (ngSubmit)="validateForm(personalDetailsForm)">
 
-      <ion-item>
-        <ion-label position="fixed" class="textDecor">Country</ion-label>
-        <ion-select placeholder="Select your country" formControlName="country">
-          <ion-select-option *ngFor="let country of countryList"
-            value="{{country.code}}">{{country.name}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div class="error-label">
-        <div
-          *ngIf="personalDetailsForm.get('country')?.invalid && (personalDetailsForm.get('country')?.dirty || personalDetailsForm.get('country')?.touched)">
-          Please select your country.
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Firstname</ion-label>
+          <ion-input formControlName="firstName" type="text" placeholder="Enter first name" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('firstName')?.invalid && (personalDetailsForm.get('firstName')?.dirty || personalDetailsForm.get('firstName')?.touched)">
+            Please provide your first name.
+          </div>
         </div>
-      </div>
-      <ion-item>
-        <ion-label position="fixed" class="textDecor">Phone</ion-label>
-        <ion-input formControlName="contact" type="phone" maxLength="10" placeholder="Enter your contact number" />
-      </ion-item>
-      <div class="error-label">
-        <div
-          *ngIf="personalDetailsForm.get('contact')?.invalid && (personalDetailsForm.get('contact')?.dirty || personalDetailsForm.get('contact')?.touched)">
-          Please provide a contact number.
-        </div>
-      </div>
 
-      <ion-button type="submit" expand="block" size="large">Next</ion-button>
-    </form>
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Lastname</ion-label>
+          <ion-input formControlName="lastName" type="text" placeholder="Enter last name" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('lastName')?.invalid && (personalDetailsForm.get('lastName')?.dirty || personalDetailsForm.get('lastName')?.touched)">
+            Please provide your last name.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Age</ion-label>
+          <ion-input formControlName="age" type="number" placeholder="Enter your age" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('age')?.invalid && (personalDetailsForm.get('age')?.dirty || personalDetailsForm.get('age')?.touched)">
+            Please provide your age.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Gender</ion-label>
+          <ion-select interface="popover" placeholder="Select your gender" formControlName="gender">
+            <ion-select-option value="Male">Male</ion-select-option>
+            <ion-select-option value="Female">Female</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('gender')?.invalid && (personalDetailsForm.get('gender')?.dirty || personalDetailsForm.get('gender')?.touched)">
+            Please select your gender.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Country</ion-label>
+          <ion-select interface="popover" placeholder="Select your country" formControlName="country">
+            <ion-select-option *ngFor="let country of countryList"
+              value="{{country.code}}">{{country.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('country')?.invalid && (personalDetailsForm.get('country')?.dirty || personalDetailsForm.get('country')?.touched)">
+            Please select your country.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Contact</ion-label>
+          <ion-input formControlName="contact" type="phone" maxLength="10" placeholder="Enter your contact number" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('contact')?.invalid && (personalDetailsForm.get('contact')?.dirty || personalDetailsForm.get('contact')?.touched)">
+            Please provide a contact number.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Email</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="Enter your email" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('email')?.invalid && (personalDetailsForm.get('email')?.dirty || personalDetailsForm.get('email')?.touched)">
+            Please provide an email.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Username</ion-label>
+          <ion-input formControlName="userName" type="text" placeholder="Create your username" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('userName')?.invalid && (personalDetailsForm.get('userName')?.dirty || personalDetailsForm.get('userName')?.touched)">
+            Please provide user name.
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label position="fixed" class="textDecor">Password</ion-label>
+          <ion-input formControlName="password" type="text" placeholder="Create your password" />
+        </ion-item>
+        <div class="error-label">
+          <div
+            *ngIf="personalDetailsForm.get('password')?.invalid && (personalDetailsForm.get('password')?.dirty || personalDetailsForm.get('password')?.touched)">
+            Please provide password.
+          </div>
+        </div>
+
+        <ion-button type="submit" expand="block" size="large">Next</ion-button>
+      </form>
+    </ion-content>
   </div>
 </div>

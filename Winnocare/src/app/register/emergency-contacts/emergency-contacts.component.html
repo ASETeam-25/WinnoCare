@@ -1,24 +1,53 @@
 <div class="content">
   <div class="emergency-details-container">
     <h1 class="textDecor" style="text-align: center;">Emergency Details</h1>
-    <div>
-      <ion-label position="fixed" class="textDecor">Emergency Contact 1</ion-label>
-      <ion-input type="text" placeholder="Enter emergency contact 1" />
-    </div>
-    <div>
-      <ion-label position="fixed" class="textDecor">Emergency Contact 2</ion-label>
-      <ion-input type="text" placeholder="Enter emergency contact 2" />
-    </div>
-    <div>
-      <ion-label position="fixed" class="textDecor">Doctor Contact 1</ion-label>
-      <ion-input type="text" placeholder="Enter doctor contact 1" />
-    </div>
-    <div>
-      <ion-label position="fixed" class="textDecor">Doctor Contact 2</ion-label>
-      <ion-input type="text" placeholder="Enter doctor contact 2" />
-    </div>
+    <form [formGroup]="emergencyContactsForm" (ngSubmit)="validateForm(emergencyContactsForm)">
 
-    <ion-button (click)="next()" expand="block" size="large">Next</ion-button>
+      <ion-item>
+        <ion-label text-wrap position="fixed" class="textDecor">Emergency Contact 1</ion-label>
+        <ion-input type="phone" formControlName="emergencyContact1" maxLength="10" placeholder="Enter emergency contact 1" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="emergencyContactsForm.get('emergencyContact1')?.invalid && (emergencyContactsForm.get('emergencyContact1')?.dirty || emergencyContactsForm.get('emergencyContact1')?.touched)">
+          Please provide emergency contact 1.
+        </div>
+      </div>
 
+      <ion-item>
+        <ion-label text-wrap position="fixed" class="textDecor">Emergency Contact 2</ion-label>
+        <ion-input type="phone" formControlName="emergencyContact2" maxLength="10" placeholder="Enter emergency contact 2" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="emergencyContactsForm.get('emergencyContact2')?.invalid && (emergencyContactsForm.get('emergencyContact2')?.dirty || emergencyContactsForm.get('emergencyContact2')?.touched)">
+          Please provide emergency contact 2.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label text-wrap position="fixed" class="textDecor">Doctor Contact 1</ion-label>
+        <ion-input type="phone" formControlName="doctorContact1" maxLength="10" placeholder="Enter doctor contact 1" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="emergencyContactsForm.get('doctorContact1')?.invalid && (emergencyContactsForm.get('doctorContact1')?.dirty || emergencyContactsForm.get('doctorContact1')?.touched)">
+          Please provide doctor contact 1.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label text-wrap position="fixed" class="textDecor">Doctor Contact 2</ion-label>
+        <ion-input type="phone" formControlName="doctorContact2" maxLength="10" placeholder="Enter doctor contact 2" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="emergencyContactsForm.get('doctorContact2')?.invalid && (emergencyContactsForm.get('doctorContact2')?.dirty || emergencyContactsForm.get('doctorContact2')?.touched)">
+          Please provide doctor contact 2.
+        </div>
+      </div>
+
+      <ion-button type="submit" expand="block" size="large">Done</ion-button>
+    </form>
   </div>
 </div>

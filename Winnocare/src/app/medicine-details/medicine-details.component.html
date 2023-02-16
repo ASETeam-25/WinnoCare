@@ -1,0 +1,64 @@
+<div class="content">
+  <div class="medicine-details-container">
+    <h1 class="textDecor" style="text-align: center;">Medicine Dosage Details</h1>
+    <form [formGroup]="medicineDetailsForm" (ngSubmit)="validateForm(medicineDetailsForm)">
+
+      <ion-item>
+        <ion-label text-wrap class="textDecor" position="fixed">Medicine Name</ion-label>
+        <ion-input formControlName="name" type="text" placeholder="Enter medicine name" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('name')?.invalid && (medicineDetailsForm.get('name')?.dirty || medicineDetailsForm.get('name')?.touched)">
+          Please enter medicine name.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label text-wrap class="textDecor" position="fixed">Expiry Date</ion-label>
+        <ion-input formControlName="expiry" type="date" placeholder="Select expiry date" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('expiry')?.invalid && (medicineDetailsForm.get('expiry')?.dirty || medicineDetailsForm.get('expiry')?.touched)">
+          Please select expiry date.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label class="textDecor" position="fixed">Duration</ion-label>
+        <ion-input formControlName="duration" type="text" placeholder="Enter Duration" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('duration')?.invalid && (medicineDetailsForm.get('duration')?.dirty || medicineDetailsForm.get('duration')?.touched)">
+          Please enter medicine duration.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label class="textDecor" position="fixed">Start Date</ion-label>
+        <ion-input formControlName="startDate" type="date" placeholder="Select start date" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('startDate')?.invalid && (medicineDetailsForm.get('startDate')?.dirty || medicineDetailsForm.get('startDate')?.touched)">
+          Please select start date.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label class="textDecor" position="fixed">End Date</ion-label>
+        <ion-input formControlName="endDate" type="date" placeholder="Select end date" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('endDate')?.invalid && (medicineDetailsForm.get('endDate')?.dirty || medicineDetailsForm.get('endDate')?.touched)">
+          Please select end date.
+        </div>
+      </div>
+
+      <ion-button type="submit" expand="block" size="large">Done</ion-button>
+    </form>
+  </div>
+</div>

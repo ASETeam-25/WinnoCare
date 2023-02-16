@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController, ToastController } from '@ionic/angular';
-import { ToastPosition } from '@ionic/core';
+import { MenuController } from '@ionic/angular';
+import { Error } from '../model/error';
 import { AuthenticationService } from '../services/authentication.service';
+import { CommonService } from '../services/common.service';
+import { LoadingService } from '../services/loading.service';
+import { ToastService } from '../services/toast.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +16,24 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  username: any;
-  password: any;
+  loginForm: FormGroup;
 
   constructor(
     private router: Router,
     public authService: AuthenticationService,
-    private toastController: ToastController,
-    public menuCtrl: MenuController) { }
+    public menuCtrl: MenuController,
+    private loadingService: LoadingService,
+    private toastService: ToastService,
+    private fb: FormBuilder,
+    private commonService: CommonService,
+    private userService: UserService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
 
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
@@ -30,22 +43,22 @@ export class LoginComponent implements OnInit {
     this.menuCtrl.enable(true);
   }
 
-  login() {
-    this.authService.login(this.username, this.password).then(() => {
-      this.router.navigate(['dashboard']);
-    }, () => {
-      this.showToast('bottom', 'Login Failed. Please check username and password.');
-    });
-
-  }
-
-  async showToast(position: ToastPosition, message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 1500,
-      position: position
-    });
-    await toast.present();
+  validateForm(form: FormGroup) {
+    if (form.valid) {
+      this.loadingService.showLoading("Logging in...");
+      this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe({
+        next: (res) => {
+          this.userService.setUsername(this.loginForm.get('username')?.value);
+          this.loadingService.dismissLoading();
+          this.router.navigate(['dashboard']);
+        }, error: (error: Error) => {
+          this.loadingService.dismissLoading();
+          this.toastService.showToast('bottom', 'Login Failed. Please check username and password.');
+        }
+      });
+    } else {
+      this.commonService.validateAllFormFields(form);
+    }
   }
 
   register() {

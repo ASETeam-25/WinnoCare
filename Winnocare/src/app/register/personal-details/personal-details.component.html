@@ -1,18 +1,32 @@
-<div class="content">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
   <div class="personal-details-container">
-    <h1 class="textDecor" style="text-align: center;">Personal Details</h1>
-    <ion-content>
-      <form [formGroup]="personalDetailsForm" (ngSubmit)="validateForm(personalDetailsForm)">
+    <form [formGroup]="personalDetailsForm" (ngSubmit)="validateForm(personalDetailsForm)">
 
+      <ion-item-group>
+        <ion-item-divider class="ion-item-divider-first">
+          <ion-label>
+            Personal Details
+          </ion-label>
+        </ion-item-divider>
         <ion-item>
           <ion-label position="fixed" class="textDecor">Firstname</ion-label>
           <ion-input formControlName="firstName" type="text" placeholder="Enter first name" />
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('firstName')?.invalid && (personalDetailsForm.get('firstName')?.dirty || personalDetailsForm.get('firstName')?.touched)">
-            Please provide your first name.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.firstName">
+            <div
+              *ngIf="personalDetailsForm.get('firstName')?.hasError(error.type) && (personalDetailsForm.get('firstName')?.dirty || personalDetailsForm.get('firstName')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
 
         <ion-item>
@@ -20,10 +34,12 @@
           <ion-input formControlName="lastName" type="text" placeholder="Enter last name" />
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('lastName')?.invalid && (personalDetailsForm.get('lastName')?.dirty || personalDetailsForm.get('lastName')?.touched)">
-            Please provide your last name.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.lastName">
+            <div
+              *ngIf="personalDetailsForm.get('lastName')?.hasError(error.type) && (personalDetailsForm.get('lastName')?.dirty || personalDetailsForm.get('lastName')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
 
         <ion-item>
@@ -31,10 +47,12 @@
           <ion-input formControlName="age" type="number" placeholder="Enter your age" />
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('age')?.invalid && (personalDetailsForm.get('age')?.dirty || personalDetailsForm.get('age')?.touched)">
-            Please provide your age.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.age">
+            <div
+              *ngIf="personalDetailsForm.get('age')?.hasError(error.type) && (personalDetailsForm.get('age')?.dirty || personalDetailsForm.get('age')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
 
         <ion-item>
@@ -46,35 +64,49 @@
           </ion-select>
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('gender')?.invalid && (personalDetailsForm.get('gender')?.dirty || personalDetailsForm.get('gender')?.touched)">
-            Please select your gender.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.gender">
+            <div
+              *ngIf="personalDetailsForm.get('gender')?.hasError(error.type) && (personalDetailsForm.get('gender')?.dirty || personalDetailsForm.get('gender')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
+      </ion-item-group>
 
+      <ion-item-group>
+        <ion-item-divider class="ion-item-divider">
+          <ion-label>
+            Contact Details
+          </ion-label>
+        </ion-item-divider>
         <ion-item>
           <ion-label position="fixed" class="textDecor">Country</ion-label>
           <ion-select interface="popover" placeholder="Select your country" formControlName="country">
             <ion-select-option *ngFor="let country of countryList"
-              value="{{country.code}}">{{country.name}}</ion-select-option>
+              [value]="country">{{country.name}}</ion-select-option>
           </ion-select>
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('country')?.invalid && (personalDetailsForm.get('country')?.dirty || personalDetailsForm.get('country')?.touched)">
-            Please select your country.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.country">
+            <div
+              *ngIf="personalDetailsForm.get('country')?.hasError(error.type) && (personalDetailsForm.get('country')?.dirty || personalDetailsForm.get('country')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
 
         <ion-item>
           <ion-label position="fixed" class="textDecor">Contact</ion-label>
-          <ion-input formControlName="contact" type="phone" maxLength="10" placeholder="Enter your contact number" />
+          {{personalDetailsForm.get('country')?.value.dial_code}}
+          <ion-input formControlName="contact" type="tel" placeholder="Enter your number" />
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('contact')?.invalid && (personalDetailsForm.get('contact')?.dirty || personalDetailsForm.get('contact')?.touched)">
-            Please provide a contact number.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.contact">
+            <div
+              *ngIf="personalDetailsForm.get('contact')?.hasError(error.type) && (personalDetailsForm.get('contact')?.dirty || personalDetailsForm.get('contact')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
 
         <ion-item>
@@ -82,36 +114,70 @@
           <ion-input formControlName="email" type="email" placeholder="Enter your email" />
         </ion-item>
         <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('email')?.invalid && (personalDetailsForm.get('email')?.dirty || personalDetailsForm.get('email')?.touched)">
-            Please provide an email.
-          </div>
+          <ng-container *ngFor="let error of errorMessages.email">
+            <div
+              *ngIf="personalDetailsForm.get('email')?.hasError(error.type) && (personalDetailsForm.get('email')?.dirty || personalDetailsForm.get('email')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
+      </ion-item-group>
 
+      <ion-item-group>
+        <ion-item-divider class="ion-item-divider">
+          <ion-label>
+            Create User
+          </ion-label>
+        </ion-item-divider>
         <ion-item>
           <ion-label position="fixed" class="textDecor">Username</ion-label>
           <ion-input formControlName="userName" type="text" placeholder="Create your username" />
         </ion-item>
-        <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('userName')?.invalid && (personalDetailsForm.get('userName')?.dirty || personalDetailsForm.get('userName')?.touched)">
-            Please provide user name.
-          </div>
+        <div class="error">
+          <ng-container *ngFor="let error of errorMessages.userName">
+            <div
+              *ngIf="personalDetailsForm.get('userName')?.hasError(error.type) && (personalDetailsForm.get('userName')?.dirty || personalDetailsForm.get('userName')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
         </div>
 
         <ion-item>
           <ion-label position="fixed" class="textDecor">Password</ion-label>
           <ion-input formControlName="password" type="text" placeholder="Create your password" />
         </ion-item>
-        <div class="error-label">
-          <div
-            *ngIf="personalDetailsForm.get('password')?.invalid && (personalDetailsForm.get('password')?.dirty || personalDetailsForm.get('password')?.touched)">
-            Please provide password.
-          </div>
+        <div class="error">
+          <ng-container *ngFor="let error of errorMessages.password">
+            <div
+              *ngIf="personalDetailsForm.get('password')?.hasError(error.type) && (personalDetailsForm.get('password')?.dirty || personalDetailsForm.get('password')?.touched)">
+              <div [innerHtml]="error.message"></div>
+            </div>
+          </ng-container>
         </div>
 
-        <ion-button type="submit" expand="block" size="large">Next</ion-button>
-      </form>
-    </ion-content>
+        <ion-item>
+          <ion-label text-wrap position="fixed" class="textDecor">Confirm Password</ion-label>
+          <ion-input formControlName="confirmPassword" type="text" placeholder="Confirm your password" />
+        </ion-item>
+        <div class="error-label">
+          <ng-container *ngFor="let error of errorMessages.confirmPassword">
+            <div
+              *ngIf="personalDetailsForm.get('confirmPassword')?.hasError(error.type) && (personalDetailsForm.get('confirmPassword')?.dirty || personalDetailsForm.get('confirmPassword')?.touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="error-label">
+          <div *ngIf="personalDetailsForm.get('confirmPassword')?.dirty && personalDetailsForm.errors">
+            Passwords don't match. Please try again.
+          </div>
+        </div>
+      </ion-item-group>
+
+    </form>
   </div>
-</div>
+</ion-content>
+<ion-footer>
+  <ion-button type="submit" (click)="validateForm(personalDetailsForm)" expand="block" size="large">Next</ion-button>
+</ion-footer>

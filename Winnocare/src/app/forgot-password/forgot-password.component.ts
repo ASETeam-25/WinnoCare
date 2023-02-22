@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonService } from 'src/app/services/common.service';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppConstants } from '../app.constants';
+import { CommonService } from '../services/common.service';
 import { ToastService } from '../services/toast.service';
-
-
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,37 +13,39 @@ import { ToastService } from '../services/toast.service';
 export class ForgotPasswordComponent implements OnInit {
 
   forgotPasswordForm: FormGroup;
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private commonService: CommonService,private toastService: ToastService) { }
+    private commonService: CommonService,
+    private toastService: ToastService) { }
 
   ngOnInit() {
     this.forgotPasswordForm = this.fb.group({
-      oldPassword: ['', Validators.required],
-      newPassword: ['', Validators.required],
+      username: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.pattern(AppConstants.PASSWORD_PATTERN)]],
       confirmNewPassword: ['', Validators.required]
-    },this.passwordMatch('newPassword', 'confirmNewPassword') );
+    });
+    this.forgotPasswordForm.addValidators(
+      this.passwordMatchValidator(this.forgotPasswordForm.get('newPassword'), this.forgotPasswordForm.get('confirmNewPassword'))
+    );
   }
 
-  passwordMatch(password: string, confirmPassword: string) {
-    return (formGroup: FormGroup) => {
-      if(password !== confirmPassword)
-      {
-        this.toastService.showToast('bottom', 'Login Failed. Please check username and password.');
-
+  passwordMatchValidator(passwordControl: AbstractControl | null, confirmPasswordControl: AbstractControl | null): ValidatorFn {
+    return () => {
+      if (passwordControl?.value !== confirmPasswordControl?.value) {
+        return { match_error: 'Value does not match' };
       }
-         return null
-     }
-}
-
+      return null;
+    }
+  }
 
   validateForm(form: FormGroup) {
     if (form.valid) {
-      //this.router.navigate(['forgotPassword', { registrationDetails: JSON.stringify(user) }]);
+      this.router.navigate(['login']);
     } else {
-
-      this.commonService.validateAllFormFields(form);    }
+      this.commonService.validateAllFormFields(form);
+    }
   }
 
 }

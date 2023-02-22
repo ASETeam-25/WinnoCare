@@ -1,22 +1,20 @@
-<div class="content">
-  <div class="medicine-tracker-container">
-
-    <h1 class="textDecor" style="text-align: center;">Medicine Tracker</h1>
-    <ion-content>
-      <ion-label *ngIf="existingDosage.length == 0">No Data available. Please add your medicine dosage.</ion-label>
-      <ion-list>
-        <ion-item *ngFor="let item of existingDosage; let i = index">
-          <ion-label>{{item.name}}</ion-label>
-          <div slot="end" style="display: inherit;">
-            <ion-label>Not Taken</ion-label>
-            <ion-toggle [checked]="item.taken" (ionChange)="medicineTaken(item)" color="success"></ion-toggle>
-            <ion-label>Taken</ion-label>
-          </div>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-
-    <ion-button (click)="addNewMedicine()" expand="block" size="large">Add New Medicine</ion-button>
-
-  </div>
-</div>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Medicine Tracker</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="medicineList">
+      <ion-icon name="list-outline"></ion-icon>
+      List
+    </ion-tab-button>
+    <ion-tab-button tab="medicineDue">
+      <ion-icon name="today-outline"></ion-icon>
+      Today
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

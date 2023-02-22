@@ -44,21 +44,22 @@ export class LoginComponent implements OnInit {
   }
 
   validateForm(form: FormGroup) {
-    if (form.valid) {
-      this.loadingService.showLoading("Logging in...");
-      this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe({
-        next: (res) => {
-          this.userService.setUsername(this.loginForm.get('username')?.value);
-          this.loadingService.dismissLoading();
-          this.router.navigate(['dashboard']);
-        }, error: (error: Error) => {
-          this.loadingService.dismissLoading();
-          this.toastService.showToast('bottom', 'Login Failed. Please check username and password.');
-        }
-      });
-    } else {
-      this.commonService.validateAllFormFields(form);
-    }
+    this.router.navigate(['dashboard']);
+    // if (form.valid) {
+    //   this.loadingService.showLoading("Logging in...");
+    //   this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe({
+    //     next: (res) => {
+    //       this.userService.setUsername(this.loginForm.get('username')?.value);
+    //       this.loadingService.dismissLoading();
+    //       this.router.navigate(['dashboard']);
+    //     }, error: (error: Error) => {
+    //       this.loadingService.dismissLoading();
+    //       this.toastService.showToast('bottom', 'Login Failed. Please check username and password.');
+    //     }
+    //   });
+    // } else {
+    //   this.commonService.validateAllFormFields(form);
+    // }
   }
 
   register() {

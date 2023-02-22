@@ -1,0 +1,14 @@
+.medicine-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+}
+
+.textDecor {
+    padding-right: 10px;
+    font-weight: bold;
+    color: cornflowerblue;
+}

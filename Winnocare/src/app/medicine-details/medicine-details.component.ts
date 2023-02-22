@@ -19,6 +19,13 @@ export class MedicineDetailsComponent implements OnInit {
   medicineDetailsForm: FormGroup;
   existingDosage = [];
 
+  timeOfDay = [
+    { "value": "Morning", "checked": false },
+    { "value": "Afternoon", "checked": false },
+    { "value": "Evening", "checked": false },
+    { "value": "Night", "checked": false },
+  ];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -33,11 +40,22 @@ export class MedicineDetailsComponent implements OnInit {
     this.medicineDetailsForm = this.fb.group({
       name: ['', Validators.required],
       expiry: ['', Validators.required],
-      duration: ['', Validators.required],
+      frequency: ['', Validators.required],
+      timeOfDay: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       taken: [false]
     });
+  }
+
+  updateTimeOfDay(event) {
+    event.checked = !event.checked;
+    let medicineTime = this.timeOfDay.filter(med => med.checked == true).map(val => val.value);
+    if (medicineTime.length > 0) {
+      this.medicineDetailsForm.patchValue({ 'timeOfDay': medicineTime })
+    } else {
+      this.medicineDetailsForm.patchValue({ 'timeOfDay': "" })
+    }
   }
 
   validateForm(form: FormGroup) {
@@ -72,6 +90,8 @@ export class MedicineDetailsComponent implements OnInit {
     let medicine: Medicine = new Medicine();
     medicine.name = form.get('name')?.value;
     medicine.expiryDate = form.get('expiry')?.value;
+    medicine.frequency = form.get('frequency')?.value;
+    medicine.timeOfDay = form.get('timeOfDay')?.value;
     medicine.startDate = form.get('startDate')?.value;
     medicine.endDate = form.get('endDate')?.value;
     return medicine;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppConstants } from 'src/app/app.constants';
 import { Error } from 'src/app/model/error';
 import { User } from 'src/app/model/user';
 import { CommonService } from 'src/app/services/common.service';
@@ -28,10 +29,10 @@ export class EmergencyContactsComponent implements OnInit {
 
   ngOnInit() {
     this.emergencyContactsForm = this.fb.group({
-      emergencyContact1: ['', Validators.required],
-      emergencyContact2: ['', Validators.required],
-      doctorContact1: ['', Validators.required],
-      doctorContact2: ['', Validators.required]
+      emergencyContact1: ['', [Validators.required, Validators.pattern(AppConstants.CONTACT_PATTERN)]],
+      emergencyContact2: ['', [Validators.required, Validators.pattern(AppConstants.CONTACT_PATTERN)]],
+      doctorContact1: ['', [Validators.required, Validators.pattern(AppConstants.CONTACT_PATTERN)]],
+      doctorContact2: ['', [Validators.required, Validators.pattern(AppConstants.CONTACT_PATTERN)]]
     });
   }
 

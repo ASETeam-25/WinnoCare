@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'medicineTracker',
-    component: MedicineTrackerComponent,
+    loadChildren: () => import('./medicine-tracker/medicine-tracker.module').then(m => m.MedicineTrackerModule),
     canActivate: [AuthGuard]
   },
   {

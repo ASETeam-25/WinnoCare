@@ -2,18 +2,26 @@ ion-item {
     margin-top: 15px;
 }
 
-ion-button {
-    margin-top: 30px;
-}
-
 ion-select {
     width: 100% !important;
     max-width: 100% !important;
 }
 
-.content {
-    height: 100%;
-    width: 100%;
+ion-content {
+    box-shadow: 2px 0px 2px 2px lightgrey;
+}
+
+.ion-item-divider,
+.ion-item-divider-first {
+    background-image: linear-gradient(to left, rgba(255, 0, 0, 0), rgba(230, 170, 170));
+    color: #000;
+    font-size: large;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.ion-item-divider-first {
+    margin-top: 0px;
 }
 
 .personal-details-container {
@@ -21,9 +29,6 @@ ion-select {
     flex-direction: column;
     justify-content: center;
     height: inherit;
-    row-gap: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 .textDecor {
@@ -34,4 +39,10 @@ ion-select {
 .error-label {
     height: 10px;
     color: red;
+    padding-left: 15px;
+}
+
+.error {
+    color: red;
+    padding-left: 15px;
 }

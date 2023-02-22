@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary"></ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="medicine-list-container">
+    <ion-label *ngIf="existingDosage.length == 0">No Data available. Please add your medicine dosage.</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let item of existingDosage; let i = index">
+        <ion-label>{{item.name}}</ion-label>
+        <div slot="end" style="display: inherit;">
+          <ion-label>Not Taken</ion-label>
+          <ion-toggle [checked]="item.taken" (ionChange)="medicineTaken(item)" color="success"></ion-toggle>
+          <ion-label>Taken</ion-label>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addNewMedicine()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

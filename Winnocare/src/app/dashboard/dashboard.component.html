@@ -1,7 +1,60 @@
-<div class="content">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
   <div class="dashboard-container">
-    <ion-button class="dashboard-actions" color="danger" size="large" disabled>SoS</ion-button>
-    <ion-button class="dashboard-actions" (click)="bookDoctor()" color="success" size="large" disabled>Book an Appointment</ion-button>
-    <ion-button class="dashboard-actions" (click)="medicineTracker()" color="success" size="large">Medicine Tracker</ion-button>
+    <ion-card>
+      <div class="div-img-container">
+        <img alt="SOS" class="img-category" src="assets\img\sos-icon.svg" />
+      </div>
+      <ion-card-header>
+        <ion-card-title>SOS</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Configure SOS to place a call incase of an emergency.
+      </ion-card-content>
+
+      <ion-button fill="clear">Configure</ion-button>
+      <ion-button fill="clear">Disable</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <div class="div-img-container">
+        <img alt="Book an appointment" class="img-category" src="assets\img\date-and-time-icon.svg" />
+      </div>
+      <ion-card-header>
+        <ion-card-title>Book an appointment</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Book an appointment with the doctor.
+      </ion-card-content>
+
+      <ion-button fill="clear" (click)="bookDoctor()">Book Now</ion-button>
+      <ion-button fill="clear">Appointments</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <div class="div-img-container">
+        <img alt="Medicine Tracker" class="img-category" src="assets\img\prescription-icon.svg" />
+      </div>
+      <ion-card-header>
+        <ion-card-title>Medicine Tracker</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Track your ongoing medicines.
+      </ion-card-content>
+
+      <ion-button fill="clear" (click)="medicineTracker()">Track</ion-button>
+      <ion-button fill="clear" (click)="addMedicine()">Add Medicine</ion-button>
+    </ion-card>
+
   </div>
-</div>
+</ion-content>

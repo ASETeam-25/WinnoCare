@@ -36,13 +36,14 @@ export class EmergencyContactsComponent implements OnInit {
     });
   }
 
-  validateForm(form: FormGroup) {
+  async validateForm(form: FormGroup) {
     if (form.valid) {
       let user: User = this.mapData(form);
-      this.loadingService.showLoading("Please wait...");
+      await this.loadingService.showLoading("Please wait...");
       this.userService.register(user).subscribe({
         next: (res) => {
           this.loadingService.dismissLoading();
+          this.toastService.showToast('bottom', 'User registered successfully.');
           this.router.navigate(['login']);
         }, error: (error: Error) => {
           this.loadingService.dismissLoading();
@@ -60,10 +61,10 @@ export class EmergencyContactsComponent implements OnInit {
 
   mapData(form: FormGroup) {
     let user: User = JSON.parse(this.route.snapshot.paramMap.get('registrationDetails') || '{}');
-    user.emergencycontact1 = form.get("emergencyContact1")?.value;
-    user.emergencycontact2 = form.get("emergencyContact2")?.value;
-    user.doctorcontact1 = form.get("doctorContact1")?.value;
-    user.doctorcontact2 = form.get("doctorContact2")?.value;
+    user.emergencyContact1 = form.get("emergencyContact1")?.value;
+    user.emergencyContact2 = form.get("emergencyContact2")?.value;
+    user.doctorContact1 = form.get("doctorContact1")?.value;
+    user.doctorContact2 = form.get("doctorContact2")?.value;
     return user;
   }
 }

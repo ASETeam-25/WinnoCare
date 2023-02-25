@@ -116,14 +116,14 @@ export class PersonalDetailsComponent implements OnInit {
 
   mapData(form: FormGroup) {
     let user = new User();
-    user.firstname = form.get('firstName')?.value;
-    user.lastname = form.get('lastName')?.value;
+    user.firstName = form.get('firstName')?.value;
+    user.lastName = form.get('lastName')?.value;
     user.age = form.get('age')?.value;
     user.gender = form.get('gender')?.value;
     user.country = form.get('country')?.value.name;
-    user.contact = form.get('contact')?.value;
+    user.phoneNumber = form.get('contact')?.value;
     user.email = form.get('email')?.value;
-    user.username = form.get('userName')?.value;
+    user.userName = form.get('userName')?.value;
     user.password = form.get('password')?.value;
     return user;
   }

@@ -58,14 +58,15 @@ export class MedicineDetailsComponent implements OnInit {
     }
   }
 
-  validateForm(form: FormGroup) {
+  async validateForm(form: FormGroup) {
     if (form.valid) {
       let medicine: Medicine = this.mapData(form);
-      this.loadingService.showLoading("Please wait...");
+      await this.loadingService.showLoading("Please wait...");
       this.userService.addMedicine(medicine).subscribe({
         next: (res) => {
           this.loadingService.dismissLoading();
           this.router.navigate(['medicineTracker']);
+          this.toastService.showToast('bottom', 'Medicine details saved successfully.');
         }, error: (error: Error) => {
           this.loadingService.dismissLoading();
           if (error.errorMessage.includes("Medicine already added!")) {
@@ -88,12 +89,12 @@ export class MedicineDetailsComponent implements OnInit {
 
   mapData(form: FormGroup) {
     let medicine: Medicine = new Medicine();
-    medicine.name = form.get('name')?.value;
+    medicine.medicineName = form.get('name')?.value;
     medicine.expiryDate = form.get('expiry')?.value;
     medicine.frequency = form.get('frequency')?.value;
     medicine.timeOfDay = form.get('timeOfDay')?.value;
-    medicine.startDate = form.get('startDate')?.value;
-    medicine.endDate = form.get('endDate')?.value;
+    medicine.medStartDate = form.get('startDate')?.value;
+    medicine.medEndDate = form.get('endDate')?.value;
     return medicine;
   }
 

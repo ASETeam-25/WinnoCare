@@ -1,15 +1,15 @@
 export class User {
-    username: string;
+    userName: string;
     password: string;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     age: string;
     gender: string;
     country: string;
-    contact: string;
+    phoneNumber: string;
     email: string;
-    emergencycontact1: string;
-    emergencycontact2: string;
-    doctorcontact1: string;
-    doctorcontact2: string;
+    emergencyContact1: string;
+    emergencyContact2: string;
+    doctorContact1: string;
+    doctorContact2: string;
 }

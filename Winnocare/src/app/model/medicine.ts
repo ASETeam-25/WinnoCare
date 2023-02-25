@@ -1,8 +1,8 @@
 export class Medicine {
-    name: string;
+    medicineName: string;
     expiryDate: string;
     frequency: Array<string>;
     timeOfDay: Array<string>;
-    startDate: string;
-    endDate: string;
+    medStartDate: string;
+    medEndDate: string;
 }

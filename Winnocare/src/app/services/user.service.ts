@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { AppConstants } from '../app.constants';
 import { Medicine } from '../model/medicine';
 import { User } from '../model/user';
@@ -10,14 +11,20 @@ import { User } from '../model/user';
 export class UserService {
 
   username: string;
+  userNameSub = new Subject();
   constructor(private http: HttpClient) { }
 
   getUsername() {
     return this.username;
   }
 
+  getName() {
+    return this.userNameSub;
+  }
+
   setUsername(username: string) {
     this.username = username;
+    this.userNameSub.next(this.username);
   }
 
   register(user: User) {
@@ -34,5 +41,11 @@ export class UserService {
   addMedicine(medicine: Medicine) {
     medicine["userName"] = this.getUsername();
     return this.http.post(AppConstants.URL + `/medicinedetails`, medicine, { responseType: 'text' });
+  }
+
+  getMedicines(username: string) {
+    let params = new HttpParams();
+    params = params.append('userName', username);
+    return this.http.post(AppConstants.URL + `/medicineschedule`, '', { params: params, responseType: 'text' });
   }
 }

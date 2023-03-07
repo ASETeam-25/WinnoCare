@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>{{'DASHBOARD.DASHBOARD' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -13,15 +13,15 @@
         <img alt="SOS" class="img-category" src="assets\img\sos-icon.svg" />
       </div>
       <ion-card-header>
-        <ion-card-title>SOS</ion-card-title>
+        <ion-card-title>{{'COMMON.SOS' | translate}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        Configure SOS to place a call incase of an emergency.
+        {{'DASHBOARD.SOS_DESCRIPTION' | translate}}
       </ion-card-content>
 
-      <ion-button fill="clear">Configure</ion-button>
-      <ion-button fill="clear">Disable</ion-button>
+      <ion-button fill="clear">{{'DASHBOARD.CONFIGURE' | translate}}</ion-button>
+      <ion-button fill="clear">{{'DASHBOARD.DISABLE' | translate}}</ion-button>
     </ion-card>
 
     <ion-card>
@@ -29,15 +29,15 @@
         <img alt="Book an appointment" class="img-category" src="assets\img\date-and-time-icon.svg" />
       </div>
       <ion-card-header>
-        <ion-card-title>Book an appointment</ion-card-title>
+        <ion-card-title>{{'DASHBOARD.BOOK_AN_APPOINTMENT' | translate}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        Book an appointment with the doctor.
+        {{'DASHBOARD.BOOK_AN_APPOINTMENT_DESCRIPTION' | translate}}
       </ion-card-content>
 
-      <ion-button fill="clear" (click)="bookDoctor()">Book Now</ion-button>
-      <ion-button fill="clear">Appointments</ion-button>
+      <ion-button fill="clear" (click)="bookDoctor()">{{'DASHBOARD.BOOK_NOW' | translate}}</ion-button>
+      <ion-button fill="clear">{{'DASHBOARD.APPOINTMENTS' | translate}}</ion-button>
     </ion-card>
 
     <ion-card>
@@ -45,15 +45,15 @@
         <img alt="Medicine Tracker" class="img-category" src="assets\img\prescription-icon.svg" />
       </div>
       <ion-card-header>
-        <ion-card-title>Medicine Tracker</ion-card-title>
+        <ion-card-title>{{'COMMON.MEDICINE_TRACKER' | translate}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        Track your ongoing medicines.
+        {{'DASHBOARD.MEDICINE_TRACKER_DESCRIPTION' | translate}}
       </ion-card-content>
 
-      <ion-button fill="clear" (click)="medicineTracker()">Track</ion-button>
-      <ion-button fill="clear" (click)="addMedicine()">Add Medicine</ion-button>
+      <ion-button fill="clear" (click)="medicineTracker()">{{'DASHBOARD.TRACK' | translate}}</ion-button>
+      <ion-button fill="clear" (click)="addMedicine()">{{'DASHBOARD.ADD_MEDICINE' | translate}}</ion-button>
     </ion-card>
 
   </div>

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Error } from 'src/app/model/error';
 import { StorageService } from 'src/app/services/storage.service';
 import { Medicine } from '../model/medicine';
-import { Error } from 'src/app/model/error';
 import { CommonService } from '../services/common.service';
 import { LoadingService } from '../services/loading.service';
-import { UserService } from '../services/user.service';
 import { ToastService } from '../services/toast.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-medicine-details',
@@ -20,10 +21,10 @@ export class MedicineDetailsComponent implements OnInit {
   existingDosage = [];
 
   timeOfDay = [
-    { "value": "Morning", "checked": false },
-    { "value": "Afternoon", "checked": false },
-    { "value": "Evening", "checked": false },
-    { "value": "Night", "checked": false },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), "checked": false },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), "checked": false },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), "checked": false },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), "checked": false },
   ];
 
   constructor(
@@ -34,7 +35,8 @@ export class MedicineDetailsComponent implements OnInit {
     private userService: UserService,
     private commonService: CommonService,
     private loadingService: LoadingService,
-    private toastService: ToastService) { }
+    private toastService: ToastService,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.medicineDetailsForm = this.fb.group({
@@ -46,6 +48,22 @@ export class MedicineDetailsComponent implements OnInit {
       endDate: ['', Validators.required],
       taken: [false]
     });
+
+    if (this.route.snapshot.paramMap.get('medicineDetails') != null) {
+      let medicineData: Medicine = JSON.parse(this.route.snapshot.paramMap.get('medicineDetails') || '');
+      if (medicineData != null || medicineData != '') {
+        this.medicineDetailsForm.setValue({
+          name: medicineData.medicineName,
+          expiry: medicineData.expiryDate,
+          frequency: medicineData.frequency,
+          timeOfDay: medicineData.timeOfDay,
+          startDate: medicineData.medStartDate,
+          endDate: medicineData.medEndDate,
+          taken: [false]
+        });
+        this.timeOfDay.filter(o1 => medicineData.timeOfDay.some(o2 => o1.value === o2)).map(val => val.checked = true);
+      }
+    }
   }
 
   updateTimeOfDay(event) {
@@ -61,18 +79,22 @@ export class MedicineDetailsComponent implements OnInit {
   async validateForm(form: FormGroup) {
     if (form.valid) {
       let medicine: Medicine = this.mapData(form);
-      await this.loadingService.showLoading("Please wait...");
+      await this.loadingService.showLoading(this.translateService.instant("COMMON.PLEASE_WAIT"));
       this.userService.addMedicine(medicine).subscribe({
         next: (res) => {
           this.loadingService.dismissLoading();
-          this.router.navigate(['medicineTracker']);
-          this.toastService.showToast('bottom', 'Medicine details saved successfully.');
+          if (this.route.snapshot.paramMap.get('previousUrl') === "dashboard") {
+            this.router.navigate(['dashboard']);
+          } else {
+            this.router.navigate(['medicineTracker']);
+          }
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_SAVED_SUCCESSFULLY"));
         }, error: (error: Error) => {
           this.loadingService.dismissLoading();
           if (error.errorMessage.includes("Medicine already added!")) {
-            this.toastService.showToast('bottom', 'Medicine is already added. Please try editing the medicine.');
+            this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_ALREADY_ADDED"));
           } else {
-            this.toastService.showToast('bottom', 'Cannot add medicine. Please try again later.');
+            this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_ADD_MEDICINE"));
           }
         }
       })

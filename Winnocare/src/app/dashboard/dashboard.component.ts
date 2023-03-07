@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router, private platform: Platform) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   bookDoctor() {
     this.router.navigate(['doctorBookings']);
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addMedicine() {
-    this.router.navigate(['medicineDetails']);
+    this.router.navigate(['medicineDetails', { previousUrl: 'dashboard' }]);
   }
 
   ionViewDidEnter() {
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
       // do nothing
     });
   }
-  
+
   ionViewWillLeave() {
     this.subscription.unsubscribe();
   }

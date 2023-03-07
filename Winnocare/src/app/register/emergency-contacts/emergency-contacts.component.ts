@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AppConstants } from 'src/app/app.constants';
 import { Error } from 'src/app/model/error';
 import { User } from 'src/app/model/user';
@@ -25,7 +26,8 @@ export class EmergencyContactsComponent implements OnInit {
     private loadingService: LoadingService,
     private toastService: ToastService,
     private fb: FormBuilder,
-    private commonService: CommonService) { }
+    private commonService: CommonService,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.emergencyContactsForm = this.fb.group({
@@ -39,18 +41,18 @@ export class EmergencyContactsComponent implements OnInit {
   async validateForm(form: FormGroup) {
     if (form.valid) {
       let user: User = this.mapData(form);
-      await this.loadingService.showLoading("Please wait...");
+      await this.loadingService.showLoading(this.translateService.instant("COMMON.PLEASE_WAIT"));
       this.userService.register(user).subscribe({
         next: (res) => {
           this.loadingService.dismissLoading();
-          this.toastService.showToast('bottom', 'User registered successfully.');
+          this.toastService.showToast('bottom', this.translateService.instant("REGISTER.USER_REGISTERED_SUCCESSFULLY"));
           this.router.navigate(['login']);
         }, error: (error: Error) => {
           this.loadingService.dismissLoading();
           if (error.errorMessage.includes("Username is already taken!")) {
-            this.toastService.showToast('bottom', 'Username is already taken. Please try with different username.');
+            this.toastService.showToast('bottom', this.translateService.instant("REGISTER.USERNAME_ALREADY_TAKEN"));
           } else {
-            this.toastService.showToast('bottom', 'Registration Failed. Please try again later.');
+            this.toastService.showToast('bottom', this.translateService.instant("REGISTER.REGISTRATION_FAILED"));
           }
         }
       });

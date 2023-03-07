@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AppConstants } from '../app.constants';
 import { Error } from '../model/error';
 import { CommonService } from '../services/common.service';
@@ -23,7 +24,8 @@ export class ForgotPasswordComponent implements OnInit {
     private commonService: CommonService,
     private toastService: ToastService,
     private userService: UserService,
-    private loadingService: LoadingService) { }
+    private loadingService: LoadingService,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.forgotPasswordForm = this.fb.group({
@@ -47,18 +49,18 @@ export class ForgotPasswordComponent implements OnInit {
 
   async validateForm(form: FormGroup) {
     if (form.valid) {
-      await this.loadingService.showLoading("Please wait...");
+      await this.loadingService.showLoading(this.translateService.instant("COMMON.PLEASE_WAIT"));
       this.userService.forgotPassword(this.forgotPasswordForm.get('username')?.value, this.forgotPasswordForm.get('newPassword')?.value).subscribe({
         next: (res) => {
           this.loadingService.dismissLoading();
-          this.toastService.showToast('bottom', 'Password changed successfully.');
+          this.toastService.showToast('bottom', this.translateService.instant("FORGOT_PASSWORD.PASSWORD_CHANGED_SUCCESFULLY"));
           this.router.navigate(['login']);
         }, error: (error: Error) => {
           this.loadingService.dismissLoading();
           if (error.errorMessage.includes("User not found")) {
-            this.toastService.showToast('bottom', 'User is not registered. Please register with this username.');
+            this.toastService.showToast('bottom', this.translateService.instant("FORGOT_PASSWORD.USER_NOT_REGISTERED"));
           } else {
-            this.toastService.showToast('bottom', 'Error occurred performing the operation. Please try again later.');
+            this.toastService.showToast('bottom', this.translateService.instant("FORGOT_PASSWORD.ERROR_CHANGING_PASSWORD"));
           }
         }
       });

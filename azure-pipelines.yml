@@ -17,7 +17,7 @@ stages:
         pool:
             pool: MyPool
         steps:
-          - template: infrastructure/ionic-android-debug-build.yml
+          - template: ionic-android-debug-build.yml
 
       # Release build
       - job: Build_Ionic_Android_Release

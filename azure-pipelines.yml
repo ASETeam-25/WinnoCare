@@ -36,12 +36,12 @@ stages:
             workingDirectory: $(Build.SourcesDirectory)/$(projectName)
             displayName: 'Build Android Project'
 
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
-              contents: "**/app-$(buildConfiguration).apk"
-              targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
-            displayName: "Copy unsigned APK to staging directory"
+          - #task: CopyFiles@2
+            #inputs:
+              #SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
+              #contents: "**/app-$(buildConfiguration).apk"
+              #targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+            #displayName: "Copy unsigned APK to staging directory"
 
           - task: PublishBuildArtifacts@1
             inputs:

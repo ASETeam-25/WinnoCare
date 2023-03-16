@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  projectName: 'ASETeam25'
+  projectName: 'Winnocare'
 
 stages:
   - stage: Build

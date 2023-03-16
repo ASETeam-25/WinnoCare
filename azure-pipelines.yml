@@ -12,7 +12,7 @@ stages:
       - job: Build_Ionic_Android_Debug
         variables:
           - name: buildConfiguration
-            value: Debug
+            value: debug
         displayName: Build Debug
         pool:
             name: default

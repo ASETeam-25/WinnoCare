@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Medicine Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="medicine-details-container">
+    <form [formGroup]="medicineDetailsForm" (ngSubmit)="validateForm(medicineDetailsForm)">
+
+      <ion-item>
+        <ion-label text-wrap class="textDecor" position="fixed">Medicine Name</ion-label>
+        <ion-input formControlName="name" type="text" placeholder="Enter medicine name" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('name')?.invalid && (medicineDetailsForm.get('name')?.dirty || medicineDetailsForm.get('name')?.touched)">
+          Please enter medicine name.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label text-wrap class="textDecor" position="fixed">Expiry Date</ion-label>
+        <ion-input formControlName="expiry" type="date" placeholder="Select expiry date" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('expiry')?.invalid && (medicineDetailsForm.get('expiry')?.dirty || medicineDetailsForm.get('expiry')?.touched)">
+          Please select expiry date.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label position="fixed" class="textDecor">Frequency</ion-label>
+        <ion-select placeholder="Select days in a week" [multiple]="true" formControlName="frequency">
+          <ion-select-option value="Monday">Monday</ion-select-option>
+          <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+          <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+          <ion-select-option value="Thrusday">Thrusday</ion-select-option>
+          <ion-select-option value="Friday">Friday</ion-select-option>
+          <ion-select-option value="Saturday">Saturday</ion-select-option>
+          <ion-select-option value="Sunday">Sunday</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('frequency')?.invalid && (medicineDetailsForm.get('frequency')?.dirty || medicineDetailsForm.get('frequency')?.touched)">
+          Please select frequency.
+        </div>
+      </div>
+
+      <ion-item lines="none">
+        <div>
+          <ion-label class="textDecor chips" position="fixed">Time of day</ion-label>
+          <span *ngFor="let time of timeOfDay">
+            <ion-chip [ngClass]="{'select-chip': time.checked == true}" (click)="updateTimeOfDay(time)"
+              [outline]="true">{{time.value}}</ion-chip>
+          </span>
+        </div>
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('timeOfDay')?.invalid && (medicineDetailsForm.get('timeOfDay')?.dirty || medicineDetailsForm.get('timeOfDay')?.touched)">
+          Please select time of day.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label class="textDecor" position="fixed">Start Date</ion-label>
+        <ion-input formControlName="startDate" type="date" placeholder="Select start date" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('startDate')?.invalid && (medicineDetailsForm.get('startDate')?.dirty || medicineDetailsForm.get('startDate')?.touched)">
+          Please select start date.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label class="textDecor" position="fixed">End Date</ion-label>
+        <ion-input formControlName="endDate" type="date" placeholder="Select end date" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="medicineDetailsForm.get('endDate')?.invalid && (medicineDetailsForm.get('endDate')?.dirty || medicineDetailsForm.get('endDate')?.touched)">
+          Please select end date.
+        </div>
+      </div>
+
+    </form>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button (click)="validateForm(medicineDetailsForm)" expand="block" size="large">Done</ion-button>
+</ion-footer>

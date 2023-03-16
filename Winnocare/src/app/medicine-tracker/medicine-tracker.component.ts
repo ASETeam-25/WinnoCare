@@ -9,28 +9,8 @@ import { StorageService } from '../services/storage.service';
 })
 export class MedicineTrackerComponent implements OnInit {
 
-  name: string;
-  existingDosage: any = [];
-
   constructor(private router: Router, private storageService: StorageService) { }
 
   ngOnInit() { }
-
-  ionViewWillEnter() {
-    this.loadData();
-  }
-
-  async loadData() {
-    this.existingDosage = await this.storageService.getDosage();
-  }
-
-  addNewMedicine() {
-    this.router.navigate(['register/medicineDetails', { previousUrl: 'medicineTracker' }]);
-  }
-
-  medicineTaken(item: any) {
-    item.taken = !item.taken;
-    this.storageService.updateDosage(item);
-  }
 
 }

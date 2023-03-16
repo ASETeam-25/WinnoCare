@@ -24,6 +24,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['medicineTracker']);
   }
 
+  addMedicine() {
+    this.router.navigate(['medicineDetails']);
+  }
+
   ionViewDidEnter() {
     this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
       // do nothing

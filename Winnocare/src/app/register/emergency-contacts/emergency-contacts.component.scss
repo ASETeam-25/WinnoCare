@@ -1,6 +1,5 @@
-.content {
-    height: 100%;
-    width: 100%;
+ion-item {
+    margin-top: 15px;
 }
 
 .emergency-details-container {
@@ -8,13 +7,15 @@
     flex-direction: column;
     justify-content: center;
     height: inherit;
-    row-gap: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 .textDecor {
-    padding-right: 10px;
     font-weight: bold;
     color: cornflowerblue;
+}
+
+.error-label {
+    height: 10px;
+    color: red;
+    padding-left: 15px;
 }

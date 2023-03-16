@@ -5,13 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { EmergencyContactsComponent } from './emergency-contacts/emergency-contacts.component';
-import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { RegisterRoutingModule } from './register-routing.module';
 
 
 @NgModule({
-  declarations: [PersonalDetailsComponent, EmergencyContactsComponent, MedicineDetailsComponent],
+  declarations: [PersonalDetailsComponent, EmergencyContactsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -1,15 +1,46 @@
-<div class="content">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Welcome</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
   <div class="login-container">
     <ion-img src="assets\img\winnovateSystemsLogo.png" class="center"></ion-img>
-    <ion-item>
-      <ion-label class="label">Username</ion-label>
-      <ion-input [(ngModel)]="username" type="text" placeholder="Enter username" />
-    </ion-item>
-    <ion-item>
-      <ion-label class="label">Password</ion-label>
-      <ion-input [(ngModel)]="password" type="password" placeholder="Enter password" />
-    </ion-item>
-    <ion-button (click)="login()" expand="block" size="large">Login</ion-button>
-    <ion-button (click)="register()" expand="block" size="large">Register</ion-button>
+    <form [formGroup]="loginForm" (ngSubmit)="validateForm(loginForm)">
+
+      <ion-item>
+        <ion-label position="fixed" class="textDecor">Username</ion-label>
+        <ion-input formControlName="username" type="text" placeholder="Enter username" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)">
+          Please enter username.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label position="fixed" class="textDecor">Password</ion-label>
+        <ion-input formControlName="password" type="password" placeholder="Enter password" />
+      </ion-item>
+      <div class="error-label">
+        <div
+          *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+          Please enter password.
+        </div>
+      </div>
+
+      <div class="div-forgot-password">
+        <a class="link-forgot-password" [routerLink]="['/forgotPassword']">Forgot Password?</a>
+      </div>
+
+      <div class="btn-actions">
+        <ion-button class="btn" (click)="register()" size="large">Register</ion-button>
+        <ion-button class="btn" type="submit" size="large">Login</ion-button>
+      </div>
+
+    </form>
+
+    <ion-button shape="round" color="danger" size="large">SOS</ion-button>
   </div>
-</div>
+</ion-content>

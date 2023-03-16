@@ -1,11 +1,7 @@
-.content {
-    height:100%;
-    width:100%;
-}
-
 .doctor-bookings-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height:inherit;
+    align-items: center;
+    height:100%;
 }

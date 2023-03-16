@@ -15,7 +15,8 @@ stages:
             value: Debug
         displayName: Build Debug
         pool:
-            pool: MyPool
+            vmImage: ''
+            name: Ridhams-MacBook-Air
         steps:   
           - script: npm install -g @ionic/cli
             displayName: 'Install Ionic CLI'
@@ -55,7 +56,8 @@ stages:
             value: Release
         displayName: Build Release
         pool:
-          pool: MyPool
+          vmImage: ''
+          name: Ridhams-MacBook-Air
         steps:
               
         - script: npm install -g @ionic/cli

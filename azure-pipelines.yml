@@ -1,0 +1,94 @@
+trigger:
+- Azure
+
+variables:
+  projectName: 'Winnocare'
+
+stages:
+  - stage: Build
+    displayName: Build Ionic - Android projects
+    jobs:
+      # Debug build
+      - job: Build_Ionic_Android_Debug
+        variables:
+          - name: buildConfiguration
+            value: debug
+        displayName: Build Debug
+        pool:
+            name: default
+            demands:
+            - agent.name -equals Ridhams-MacBook-Air
+        steps:   
+          - script: npm install -g @ionic/cli
+            displayName: 'Install Ionic CLI'
+
+          - task: Npm@1
+            inputs:
+              workingDir: '$(Build.SourcesDirectory)/$(projectName)'
+              command: install
+            displayName: 'NPM Install'
+
+          - powershell: |
+              ionic cap build android --no-open
+              npx cap sync
+              cd android
+              ./gradlew assemble$(buildConfiguration)
+            workingDirectory: $(Build.SourcesDirectory)/$(projectName)
+            displayName: 'Build Android Project'
+
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
+              contents: "**/app-$(buildConfiguration).apk"
+              targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+            displayName: "Copy unsigned APK to staging directory"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+              ArtifactName: "$(projectName)"
+              publishLocation: "Container"
+            displayName: "Publish artifacts"
+
+      # Release build
+      - job: Build_Ionic_Android_Release
+        variables:
+          - name: buildConfiguration
+            value: Release
+        displayName: Build Release
+        pool:
+          name: default
+          demands:
+          - agent.name -equals Ridhams-MacBook-Air
+        steps:
+              
+        - script: npm install -g @ionic/cli
+          displayName: 'Install Ionic CLI'
+
+        - task: Npm@1
+          inputs:
+            workingDir: '$(Build.SourcesDirectory)/$(projectName)'
+            command: install
+          displayName: 'NPM Install'
+
+        - powershell: |
+            ionic cap build android --prod --no-open
+            npx cap sync
+            cd android
+            ./gradlew assemble$(buildConfiguration)
+          workingDirectory: $(Build.SourcesDirectory)/$(projectName)
+          displayName: 'Build Android Project'
+
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
+            contents: "**/$(projectName)-$(buildConfiguration).apk"
+            targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+          displayName: "Copy unsigned APK to staging directory"
+
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+            ArtifactName: "$(projectName)"
+            publishLocation: "Container"
+          displayName: "Publish artifacts"

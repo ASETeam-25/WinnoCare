@@ -1,0 +1,31 @@
+trigger:
+- dev
+
+variables:
+  projectName: 'WinnoCare'
+
+stages:
+  - stage: Build
+    displayName: Build Ionic - Android projects
+    jobs:
+      # Debug build
+      - job: Build_Ionic_Android_Debug
+        variables:
+          - name: buildConfiguration
+            value: Debug
+        displayName: Build Debug
+        pool:
+          pool: MyPool
+        steps:
+          - template: ionic-android-debug-build.yml
+
+      # Release build
+      - job: Build_Ionic_Android_Release
+        variables:
+          - name: buildConfiguration
+            value: Release
+        displayName: Build Release
+        pool:
+          pool: MyPool
+        steps:
+          - template: ionic-android-release-build.yml

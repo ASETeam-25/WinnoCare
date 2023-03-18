@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ColorModeService } from './services/color-mode.service';
 import { UserService } from './services/user.service';
 @Component({
   selector: 'app-root',
@@ -17,12 +18,26 @@ export class AppComponent {
 
   constructor(
     private translateService: TranslateService,
-    private userService: UserService) {
+    private userService: UserService,
+    private colorMode: ColorModeService) {
     this.initializeApp();
   }
 
   initializeApp() {
-    this.translateService.setDefaultLang('en');
+    let preferredLang = localStorage.getItem("AppLanguage");
+    if (preferredLang != null) {
+      this.translateService.setDefaultLang(JSON.parse(preferredLang).code);
+    } else {
+      this.translateService.setDefaultLang('en');
+    }
+    
+    this.colorMode.darkMode$.subscribe((darkMode) => {
+      if (darkMode) {
+        document.body.classList.add('dark-theme');
+      } else {
+        document.body.classList.remove('dark-theme');
+      }
+    })
   }
 
   ngOnInit() {

@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'my-app',
+  appId: 'com.ase.winnocare',
+  appName: 'Winnocare',
   webDir: 'www',
   bundledWebRuntime: false
 };

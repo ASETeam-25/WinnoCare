@@ -16,7 +16,8 @@
     },
     "SETTINGS": {
         "SETTINGS": "Paramètres",
-        "PREFERRED_LANGUAGE": "Langue préférée"
+        "PREFERRED_LANGUAGE": "Langue préférée",
+        "THEME": "Thème"
     },
     "LOGIN": {
         "WELCOME": "Bienvenue",
@@ -87,7 +88,16 @@
         "APPOINTMENTS": "Rendez-vous",
         "MEDICINE_TRACKER_DESCRIPTION": "Suivez vos médicaments en cours.",
         "TRACK": "Piste",
-        "ADD_MEDICINE": "Ajouter un médicament"
+        "ADD_MEDICINE": "Ajouter un médicament",
+        "USER_NOT_FOUND": "Utilisateur introuvable. SOS sera désactivé.",
+        "EMERGENCY_CONTACT_FAILED": "Impossible d'obtenir un contact d'urgence par défaut.",
+        "ENABLE": "Activer"
+    },
+    "CONFIGURE_SOS": {
+        "CONFIGURE_SOS": "Configurer SOS",
+        "SOS_CONTACT": "SOS Contact",
+        "Value": "Valeur",
+        "UPDATE": "Mettre à jour"
     },
     "MEDICINE_TRACKER": {
         "ONGOING_MEDS": "Médicaments en cours",
@@ -96,7 +106,12 @@
         "DELETE": "Supprimer",
         "NO_DUE": "Pas d'échéance",
         "NO_DATA_TO_DISPLAY": "Aucune donnée à afficher. Veuillez ajouter des médicaments.",
-        "ERROR_FETCHING_MEDICINES": "Une erreur s'est produite lors de l'exécution de l'opération. Veuillez réessayer plus tard."
+        "ERROR_FETCHING_MEDICINES": "Une erreur s'est produite lors de l'exécution de l'opération. Veuillez réessayer plus tard.",
+        "MEDICINE_TAKEN": "Pris",
+        "MEDICINE_NOT_TAKEN": "Non pris",
+        "MEDICINE_REMOVED_SUCCESSFULLY": "Médicament retiré avec succès.",
+        "MEDICINE_NOT_FOUND": "Détails du médicament introuvables. Veuillez réessayer plus tard.",
+        "CANNOT_DELETE_MEDICINE": "Impossible d'enlever le médicament pour le moment. Veuillez réessayer plus tard."
     },
     "MEDICINE_DETAILS": {
         "MEDICINE_DETAILS": "Détails du médicament",
@@ -124,7 +139,10 @@
         "SELECT_END_DATE": "Sélectionnez la date de fin",
         "MEDICINE_DETAILS_SAVED_SUCCESSFULLY": "Les détails du médicament ont été enregistrés avec succès.",
         "MEDICINE_ALREADY_ADDED": "La médecine est déjà ajoutée. S'il vous plaît essayer de modifier le médicament.",
-        "CANNOT_ADD_MEDICINE": "Impossible d'ajouter des médicaments. Veuillez réessayer plus tard."
+        "CANNOT_ADD_MEDICINE": "Impossible d'ajouter des médicaments. Veuillez réessayer plus tard.",
+        "MEDICINE_DETAILS_UPDATED_SUCCESSFULLY": "Les détails du médicament ont été mis à jour avec succès.",
+        "MEDICINE_NOT_FOUND": "Détails du médicament introuvables. Veuillez réessayer plus tard.",
+        "CANNOT_UPDATE_MEDICINE": "Impossible de mettre à jour les détails du médicament. Veuillez réessayer plus tard."
     },
     "ERROR": {
         "USERNAME": "Veuillez saisir le nom d'utilisateur.",

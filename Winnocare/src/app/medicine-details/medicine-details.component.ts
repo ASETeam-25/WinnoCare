@@ -7,8 +7,8 @@ import { StorageService } from 'src/app/services/storage.service';
 import { Medicine } from '../model/medicine';
 import { CommonService } from '../services/common.service';
 import { LoadingService } from '../services/loading.service';
+import { MedicineService } from '../services/medicine.service';
 import { ToastService } from '../services/toast.service';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-medicine-details',
@@ -32,7 +32,7 @@ export class MedicineDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private storageService: StorageService,
-    private userService: UserService,
+    private medicineService: MedicineService,
     private commonService: CommonService,
     private loadingService: LoadingService,
     private toastService: ToastService,
@@ -80,24 +80,12 @@ export class MedicineDetailsComponent implements OnInit {
     if (form.valid) {
       let medicine: Medicine = this.mapData(form);
       await this.loadingService.showLoading(this.translateService.instant("COMMON.PLEASE_WAIT"));
-      this.userService.addMedicine(medicine).subscribe({
-        next: (res) => {
-          this.loadingService.dismissLoading();
-          if (this.route.snapshot.paramMap.get('previousUrl') === "dashboard") {
-            this.router.navigate(['dashboard']);
-          } else {
-            this.router.navigate(['medicineTracker']);
-          }
-          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_SAVED_SUCCESSFULLY"));
-        }, error: (error: Error) => {
-          this.loadingService.dismissLoading();
-          if (error.errorMessage.includes("Medicine already added!")) {
-            this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_ALREADY_ADDED"));
-          } else {
-            this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_ADD_MEDICINE"));
-          }
-        }
-      })
+      if (this.route.snapshot.paramMap.get('medicineDetails') != null) {
+        this.updateMedicine(medicine);
+      } else {
+        this.addMedicine(medicine);
+      }
+
       //await this.storageService.addDosage(this.medicineDetailsForm.value);
       // if (this.route.snapshot.paramMap.get('previousUrl') == "medicineTracker") {
       //   this.router.navigate(['medicineTracker']);
@@ -107,6 +95,44 @@ export class MedicineDetailsComponent implements OnInit {
     } else {
       this.commonService.validateAllFormFields(form);
     }
+  }
+
+  addMedicine(medicine: Medicine) {
+    this.medicineService.addMedicine(medicine).subscribe({
+      next: (res) => {
+        this.loadingService.dismissLoading();
+        if (this.route.snapshot.paramMap.get('previousUrl') === "dashboard") {
+          this.router.navigate(['dashboard']);
+        } else {
+          this.router.navigate(['medicineTracker']);
+        }
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_SAVED_SUCCESSFULLY"));
+      }, error: (error: Error) => {
+        this.loadingService.dismissLoading();
+        if (error.errorMessage.includes("Medicine already added!")) {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_ALREADY_ADDED"));
+        } else {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_ADD_MEDICINE"));
+        }
+      }
+    })
+  }
+
+  updateMedicine(medicine: Medicine) {
+    this.medicineService.updateMedicine(medicine).subscribe({
+      next: (res) => {
+        this.loadingService.dismissLoading();
+        this.router.navigate(['medicineTracker']);
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_UPDATED_SUCCESSFULLY"));
+      }, error: (error: Error) => {
+        this.loadingService.dismissLoading();
+        if (error.errorMessage.includes("Details Not found")) {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_NOT_FOUND"));
+        } else {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_UPDATE_MEDICINE"));
+        }
+      }
+    })
   }
 
   mapData(form: FormGroup) {

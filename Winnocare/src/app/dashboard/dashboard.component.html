@@ -20,8 +20,9 @@
         {{'DASHBOARD.SOS_DESCRIPTION' | translate}}
       </ion-card-content>
 
-      <ion-button fill="clear">{{'DASHBOARD.CONFIGURE' | translate}}</ion-button>
-      <ion-button fill="clear">{{'DASHBOARD.DISABLE' | translate}}</ion-button>
+      <ion-button disabled="true" (click)="configureSos()" fill="clear">{{'DASHBOARD.CONFIGURE' | translate}}</ion-button>
+      <ion-button *ngIf="!disableSosBtn" (click)="toggleSos()" fill="clear">{{'DASHBOARD.ENABLE' | translate}}</ion-button>
+      <ion-button *ngIf="disableSosBtn" (click)="toggleSos()" fill="clear">{{'DASHBOARD.DISABLE' | translate}}</ion-button>
     </ion-card>
 
     <ion-card>
@@ -36,8 +37,8 @@
         {{'DASHBOARD.BOOK_AN_APPOINTMENT_DESCRIPTION' | translate}}
       </ion-card-content>
 
-      <ion-button fill="clear" (click)="bookDoctor()">{{'DASHBOARD.BOOK_NOW' | translate}}</ion-button>
-      <ion-button fill="clear">{{'DASHBOARD.APPOINTMENTS' | translate}}</ion-button>
+      <ion-button disabled="true" fill="clear" (click)="bookDoctor()">{{'DASHBOARD.BOOK_NOW' | translate}}</ion-button>
+      <ion-button disabled="true" fill="clear">{{'DASHBOARD.APPOINTMENTS' | translate}}</ion-button>
     </ion-card>
 
     <ion-card>

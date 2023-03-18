@@ -16,5 +16,14 @@
         </ng-container>
       </ion-select>
     </ion-item>
+
+    <ion-item>
+      <ion-label text-wrap position="fixed" class="textDecor">{{'SETTINGS.THEME'| translate}}</ion-label>
+      <ion-segment (ionChange)="changeColorScheme($event)" value="{{currentColorMode}}">
+        <ion-segment-button *ngFor="let colorMode of colorModes" value="{{colorMode}}">
+          <ion-label>{{colorMode}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
   </div>
 </ion-content>

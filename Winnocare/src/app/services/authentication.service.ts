@@ -15,7 +15,7 @@ export class AuthenticationService {
   constructor(private router: Router, private http: HttpClient) { }
 
   login(userName: string, password: string) {
-    return this.http.post<any>(AppConstants.URL + `/login`, { userName, password }).pipe(map(res => {
+    return this.http.post<any>(AppConstants.URL + `/user/login`, { userName, password }).pipe(map(res => {
       if (res.responseCode == "SUCCESS") {
         this.loginState = true;
       } else {

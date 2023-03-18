@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loadedStrs: Array<string> = [];
+  emergencyContact: any;
+  disableSos: boolean = false;
 
   constructor(
     private router: Router,
@@ -40,6 +42,16 @@ export class LoginComponent implements OnInit {
 
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
+    if (localStorage.getItem("SOS") && localStorage.getItem("EmergencyContact")) {
+      if (localStorage.getItem("SOS") == "true") {
+        this.emergencyContact = localStorage.getItem("EmergencyContact");
+        this.disableSos = false;
+      } else {
+        this.disableSos = true;
+      }
+    } else {
+      this.disableSos = true;
+    }
   }
 
   ionViewDidLeave() {
@@ -48,7 +60,6 @@ export class LoginComponent implements OnInit {
 
   async validateForm(form: FormGroup) {
     if (form.valid) {
-
       await this.loadingService.showLoading(this.translateService.instant("LOGIN.LOGGING_IN"));
       this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe({
         next: (res) => {

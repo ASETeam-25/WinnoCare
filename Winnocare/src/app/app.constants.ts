@@ -1,5 +1,6 @@
 export class AppConstants {
-    public static URL: string = "http://localhost:8080/api/auth/user";
+   // public static URL: string = "http://localhost:8080/api/auth";
+    public static URL: string = "https://winnocareapp.azurewebsites.net/api/auth";
     public static NAME_PATTERN: string = "^[a-zA-Z]*$";
     public static AGE_PATTERN: string = "^[0-9]{1,3}$";
     public static CONTACT_PATTERN: string = "^(\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$";

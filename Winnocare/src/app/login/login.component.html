@@ -35,12 +35,16 @@
       </div>
 
       <div class="btn-actions">
-        <ion-button class="btn ion-text-wrap" (click)="register()" size="large">{{ 'LOGIN.REGISTER' | translate }}</ion-button>
+        <ion-button class="btn ion-text-wrap" (click)="register()" size="large">
+          {{ 'LOGIN.REGISTER' | translate }}
+        </ion-button>
         <ion-button class="btn ion-text-wrap" type="submit" size="large">{{ 'LOGIN.LOGIN' | translate }}</ion-button>
       </div>
 
     </form>
 
-    <ion-button shape="round" color="danger" size="large">{{ 'COMMON.SOS' | translate }}</ion-button>
+    <ion-button href="tel:{{emergencyContact}}" disabled={{disableSos}} shape="round" color="danger" size="large">
+      {{ 'COMMON.SOS' | translate }}
+    </ion-button>
   </div>
 </ion-content>

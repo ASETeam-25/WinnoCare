@@ -28,24 +28,19 @@ export class UserService {
   }
 
   register(user: User) {
-    return this.http.post(AppConstants.URL + `/register`, user, { responseType: 'text' });
+    return this.http.post(AppConstants.URL + `/user/register`, user, { responseType: 'text' });
   }
 
   forgotPassword(username: string, password: string) {
     let params = new HttpParams();
     params = params.append('userName', username);
     params = params.append('newPassword', password);
-    return this.http.post(AppConstants.URL + `/forgotpassword`, '', { params: params, responseType: 'text' });
+    return this.http.post(AppConstants.URL + `/user/forgotpassword`, '', { params: params, responseType: 'text' });
   }
 
-  addMedicine(medicine: Medicine) {
-    medicine["userName"] = this.getUsername();
-    return this.http.post(AppConstants.URL + `/medicinedetails`, medicine, { responseType: 'text' });
-  }
-
-  getMedicines(username: string) {
+  getEmergencyContact(username: string) {
     let params = new HttpParams();
     params = params.append('userName', username);
-    return this.http.post(AppConstants.URL + `/medicineschedule`, '', { params: params, responseType: 'text' });
+    return this.http.get(AppConstants.URL + `/emergency/contact`, { params: params, responseType: 'text' });
   }
 }

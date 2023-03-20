@@ -65,23 +65,23 @@ export class DashboardComponent implements OnInit {
   }
 
   async getEmergencyContact() {
-    if (!localStorage.getItem("EmergencyContact")) {
-      await this.loadingService.showLoading(this.translateService.instant("COMMON.LOADING"));
-      this.userService.getEmergencyContact(this.userService.getUsername()).subscribe({
-        next: (res) => {
-          this.loadingService.dismissLoading();
-          let result = JSON.parse(res);
-          localStorage.setItem("EmergencyContact", result.defultContact);
-        }, error: (error: Error) => {
-          this.loadingService.dismissLoading();
-          if (error?.errorMessage?.includes("User not found")) {
-            this.toastService.showToast('bottom', this.translateService.instant("DASHBOARD.USER_NOT_FOUND"));
-          } else {
-            this.toastService.showToast('bottom', this.translateService.instant("DASHBOARD.EMERGENCY_CONTACT_FAILED"));
-          }
+    await this.loadingService.showLoading(this.translateService.instant("COMMON.LOADING"));
+    this.userService.getEmergencyContact(this.userService.getUsername()).subscribe({
+      next: (res) => {
+        this.loadingService.dismissLoading();
+        let result = JSON.parse(res);
+        delete result.responseCode;
+        delete result.message;
+        localStorage.setItem("EmergencyContacts", JSON.stringify(result));
+      }, error: (error: Error) => {
+        this.loadingService.dismissLoading();
+        if (error?.errorMessage?.includes("User not found")) {
+          this.toastService.showToast('bottom', this.translateService.instant("DASHBOARD.USER_NOT_FOUND"));
+        } else {
+          this.toastService.showToast('bottom', this.translateService.instant("DASHBOARD.EMERGENCY_CONTACT_FAILED"));
         }
-      });
-    }
+      }
+    });
   }
 
 }

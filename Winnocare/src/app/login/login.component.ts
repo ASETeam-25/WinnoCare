@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loadedStrs: Array<string> = [];
-  emergencyContact: any;
+  sosContact: any;
   disableSos: boolean = false;
 
   constructor(
@@ -42,9 +42,11 @@ export class LoginComponent implements OnInit {
 
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
-    if (localStorage.getItem("SOS") && localStorage.getItem("EmergencyContact")) {
+    if (localStorage.getItem("SOS") && localStorage.getItem("EmergencyContacts")) {
       if (localStorage.getItem("SOS") == "true") {
-        this.emergencyContact = localStorage.getItem("EmergencyContact");
+        let result = JSON.parse(localStorage.getItem("EmergencyContacts") || "");
+        let defaultContact = result["defultContact"];
+        this.sosContact = result[defaultContact];
         this.disableSos = false;
       } else {
         this.disableSos = true;

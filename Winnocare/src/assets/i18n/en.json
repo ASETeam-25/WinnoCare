@@ -97,7 +97,10 @@
 		"CONFIGURE_SOS": "Configure SOS",
 		"SOS_CONTACT": "SOS Contact",
 		"Value": "Value",
-		"UPDATE": "Update"
+		"UPDATE": "Update",
+		"EMERGENCY_CONTACT_UPDATED": "Emergency contact updated successfully.",
+		"USER_NOT_FOUND": "User not found. Cannot update SOS preferences.",
+		"UNABLE_TO_UPDATE_EMERGENCY_CONTACT": "Unable to update SOS emergency contact. Please try again later."
 	},
 	"MEDICINE_TRACKER": {
 		"ONGOING_MEDS": "Ongoing Meds",
@@ -142,7 +145,8 @@
 		"CANNOT_ADD_MEDICINE": "Cannot add medicine. Please try again later.",
 		"MEDICINE_DETAILS_UPDATED_SUCCESSFULLY": "Medicine details updated successfully.",
 		"MEDICINE_NOT_FOUND": "Medicine details not found. Please try again later.",
-		"CANNOT_UPDATE_MEDICINE": "Failed to update medicine details. Please try again later."
+		"CANNOT_UPDATE_MEDICINE": "Failed to update medicine details. Please try again later.",
+		"TIME": "{{timeOfDay}} Time"
 	},
 	"ERROR": {
 		"USERNAME": "Please enter username.",

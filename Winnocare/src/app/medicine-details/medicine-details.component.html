@@ -79,6 +79,21 @@
         </div>
       </div>
 
+      <span *ngFor="let time of timeOfDay, let i = index">
+        <ion-item *ngIf="time.checked">
+          <ion-label text-wrap position="fixed" class="textDecor">{{'MEDICINE_DETAILS.TIME' | translate:
+            {'timeOfDay':time.value} }}</ion-label>
+          <ion-datetime-button slot="end" datetime="{{'datetime' + i}}"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime (ionChange)="timeSelected($event, time)" [showDefaultButtons]="true" presentation="time"
+                id="{{'datetime'+i}}"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+      </span>
+
       <ion-item>
         <ion-label text-wrap class="textDecor" position="fixed">{{'MEDICINE_DETAILS.START_DATE' |
           translate}}</ion-label>

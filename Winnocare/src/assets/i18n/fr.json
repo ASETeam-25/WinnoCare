@@ -97,7 +97,10 @@
         "CONFIGURE_SOS": "Configurer SOS",
         "SOS_CONTACT": "SOS Contact",
         "Value": "Valeur",
-        "UPDATE": "Mettre à jour"
+        "UPDATE": "Mettre à jour",
+        "EMERGENCY_CONTACT_UPDATED": "Contact d'urgence mis à jour avec succès.",
+        "USER_NOT_FOUND": "Utilisateur introuvable. Impossible de mettre à jour les préférences SOS.",
+        "UNABLE_TO_UPDATE_EMERGENCY_CONTACT": "Impossible de mettre à jour le contact d'urgence SOS. Veuillez réessayer plus tard."
     },
     "MEDICINE_TRACKER": {
         "ONGOING_MEDS": "Médicaments en cours",
@@ -142,7 +145,8 @@
         "CANNOT_ADD_MEDICINE": "Impossible d'ajouter des médicaments. Veuillez réessayer plus tard.",
         "MEDICINE_DETAILS_UPDATED_SUCCESSFULLY": "Les détails du médicament ont été mis à jour avec succès.",
         "MEDICINE_NOT_FOUND": "Détails du médicament introuvables. Veuillez réessayer plus tard.",
-        "CANNOT_UPDATE_MEDICINE": "Impossible de mettre à jour les détails du médicament. Veuillez réessayer plus tard."
+        "CANNOT_UPDATE_MEDICINE": "Impossible de mettre à jour les détails du médicament. Veuillez réessayer plus tard.",
+        "TIME": "{{timeOfDay}} Heure"
     },
     "ERROR": {
         "USERNAME": "Veuillez saisir le nom d'utilisateur.",

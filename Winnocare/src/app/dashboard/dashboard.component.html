@@ -20,7 +20,7 @@
         {{'DASHBOARD.SOS_DESCRIPTION' | translate}}
       </ion-card-content>
 
-      <ion-button disabled="true" (click)="configureSos()" fill="clear">{{'DASHBOARD.CONFIGURE' | translate}}</ion-button>
+      <ion-button disabled="{{!disableSosBtn}}" (click)="configureSos()" fill="clear">{{'DASHBOARD.CONFIGURE' | translate}}</ion-button>
       <ion-button *ngIf="!disableSosBtn" (click)="toggleSos()" fill="clear">{{'DASHBOARD.ENABLE' | translate}}</ion-button>
       <ion-button *ngIf="disableSosBtn" (click)="toggleSos()" fill="clear">{{'DASHBOARD.DISABLE' | translate}}</ion-button>
     </ion-card>

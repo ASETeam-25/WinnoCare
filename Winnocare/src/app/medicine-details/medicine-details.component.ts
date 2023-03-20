@@ -21,10 +21,10 @@ export class MedicineDetailsComponent implements OnInit {
   existingDosage = [];
 
   timeOfDay = [
-    { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), "checked": false },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), "checked": false },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), "checked": false },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), "checked": false },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), "checked": false, time: "" }
   ];
 
   constructor(
@@ -144,6 +144,10 @@ export class MedicineDetailsComponent implements OnInit {
     medicine.medStartDate = form.get('startDate')?.value;
     medicine.medEndDate = form.get('endDate')?.value;
     return medicine;
+  }
+
+  timeSelected(event: any, time: any) {
+    this.timeOfDay.filter((item) => item.value == time.value).map((val) => val.time = event.detail.value);
   }
 
 }

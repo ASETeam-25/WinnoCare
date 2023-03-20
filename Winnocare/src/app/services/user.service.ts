@@ -43,4 +43,11 @@ export class UserService {
     params = params.append('userName', username);
     return this.http.get(AppConstants.URL + `/emergency/contact`, { params: params, responseType: 'text' });
   }
+
+  setEmergencyContact(username: string, defaultContact: string) {
+    let params = new HttpParams();
+    params = params.append('userName', username);
+    params = params.append('defaultContact', defaultContact);
+    return this.http.post(AppConstants.URL + `/update/defaultcontact`, '', { params: params, responseType: 'text' });
+  }
 }

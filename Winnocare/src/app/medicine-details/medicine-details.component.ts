@@ -157,6 +157,23 @@ export class MedicineDetailsComponent implements OnInit {
     this.timeOfDay.filter((item) => item.value == time.value).map((val) => val.time = event.detail.value);
   }
 
+
+  //barcode 1 : 01034531200000111719112510ABCD1234
+  // (01)03453120000011 GTIN number
+  //(17)191125 Expiry date
+ //(10)ABCD1234 Batch lot
+
+ //barcode 2 :01095011010209171719050810ABCD1234
+ //(01)09501101020917 (17)190508 (10)ABCD12342110
+
+ //barcode 3 : 01034531200000111719112510ABCD1234
+ //GTIN (01): 03453120000011
+ //EXPIRY: 2019-11-25
+ //BATCH/LOT (10): ABCD1234
+
+ //barcode 4 : 01050601419000151719020010ABC123992
+ //(01)05060141900015 (17)190200 (10)ABC123992
+
   scanBarcode() {
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,

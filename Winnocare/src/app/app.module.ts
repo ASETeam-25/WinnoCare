@@ -27,6 +27,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SettingsComponent } from './settings/settings.component';
 import { ConfigureSosComponent } from './configure-sos/configure-sos.component';
 import { ColorModeService } from './services/color-mode.service';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
     UserService,
     LoadingService,
     ColorModeService,
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

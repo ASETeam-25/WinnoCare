@@ -9,6 +9,8 @@ import { CommonService } from '../services/common.service';
 import { LoadingService } from '../services/loading.service';
 import { MedicineService } from '../services/medicine.service';
 import { ToastService } from '../services/toast.service';
+import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+
 
 @Component({
   selector: 'app-medicine-details',
@@ -18,6 +20,10 @@ import { ToastService } from '../services/toast.service';
 export class MedicineDetailsComponent implements OnInit {
 
   medicineDetailsForm: FormGroup;
+  scannedData: any;
+  encodedData: '';
+  encodeData: any;
+  inputData: any;
   existingDosage = [];
 
   timeOfDay = [
@@ -36,6 +42,7 @@ export class MedicineDetailsComponent implements OnInit {
     private commonService: CommonService,
     private loadingService: LoadingService,
     private toastService: ToastService,
+    private barcodeScanner: BarcodeScanner,
     private translateService: TranslateService) { }
 
   ngOnInit() {
@@ -148,6 +155,34 @@ export class MedicineDetailsComponent implements OnInit {
 
   timeSelected(event: any, time: any) {
     this.timeOfDay.filter((item) => item.value == time.value).map((val) => val.time = event.detail.value);
+  }
+
+  scanBarcode() {
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+      formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
+      orientation: 'portrait',
+    };
+
+    this.barcodeScanner.scan(options).then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.scannedData = barcodeData;
+
+      const GTINStartIndex = this.scannedData.indexOf("(01)");
+      const ExpiryDateStartIndex = this.scannedData.indexOf("(17)");
+
+      const id01Value = this.scannedData.substring(GTINStartIndex + 4, GTINStartIndex);
+      const id17Value = this.scannedData.substring(ExpiryDateStartIndex + 4, ExpiryDateStartIndex);
+
+
+    }).catch(err => {
+      console.log('Error', err);
+    });
   }
 
 }

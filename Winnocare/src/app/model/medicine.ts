@@ -6,4 +6,5 @@ export class Medicine {
     medStartDate: string;
     medEndDate: string;
     taken: boolean;
-}
+    GTIN: string;
+  }

@@ -61,6 +61,25 @@ stages:
               javaHomeOption: 'JDKVersion'
               jdkVersionOption: 'default'
 
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                pwd
+                ls -la $(Build.SourcesDirectory)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk
+
           - task: PublishBuildArtifacts@1
             inputs:
               PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(projectName)"

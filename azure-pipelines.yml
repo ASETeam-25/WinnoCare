@@ -72,19 +72,13 @@ stages:
                 echo "***********************************************************"
                 ls -la $(Build.SourcesDirectory)/$(projectName)/android/
                 echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app
-                echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build
-                echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs
-                echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)
 
-          - task: PublishBuildArtifacts@1
+          - task: CopyFiles@2
+            displayName: 'Copy Files to: Drop'
             inputs:
-              PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(projectName)"
-              ArtifactName: "$(projectName)"
-              publishLocation: "Container"
-            displayName: "Publish artifacts"
-
-      # Release build
+              SourceFolder: '$(workingDirectory)/app/build/outputs/apk/$(buildConfiguration)'
+              Contents: "$(projectName)-$(buildConfiguration).apk"
+              TargetFolder: '$(build.artifactStagingDirectory)'
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish Artifact: Drop'

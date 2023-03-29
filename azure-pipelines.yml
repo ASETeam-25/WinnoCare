@@ -24,7 +24,7 @@ stages:
 
           - task: Npm@1
             inputs:
-              workingDir: '$(Build.SourcesDirectory)/$(projectName)'
+              workingDir: '$(Build.SourcesDirectory)/$(projectName)/android'
               command: install
             displayName: 'NPM Install'
 

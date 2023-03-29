@@ -36,11 +36,22 @@ stages:
             workingDirectory: $(Build.SourcesDirectory)/$(projectName)
             displayName: 'Build Android Project'
 
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                pwd
+                ls -la $(Build.SourcesDirectory)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/andriod/
+                echo "***********************************************************"
           - task: Gradle@2
             displayName: 'Building Android App'
             inputs:
-              workingDirectory: $(Build.SourcesDirectory)/$(projectName)/andriod/
-              gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/android/gradlew
+              workingDirectory: $(Build.SourcesDirectory)/$(projectName)/
+              gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/gradlew
               gradleOptions: '-Xmx3072m'
               publishJUnitResults: false
               testResultsFiles: '**/TEST-*.xml'

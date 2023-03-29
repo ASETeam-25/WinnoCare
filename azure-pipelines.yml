@@ -30,7 +30,7 @@ stages:
           
           - powershell: |
               ionic cap build android --no-open
-              npx cap copy
+              npx cap copy android
               npx cap update android
               npx cap sync android
               cd android

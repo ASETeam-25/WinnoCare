@@ -78,7 +78,7 @@ stages:
             displayName: 'Copy Files to: Drop'
             inputs:
               SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
-              Contents: "$(projectName)-$(buildConfiguration).apk"
+              Contents: "app-$(buildConfiguration).apk"
               TargetFolder: '$(build.artifactStagingDirectory)'
           - task: PublishBuildArtifacts@1
             displayName: 'Publish Artifact: Drop'

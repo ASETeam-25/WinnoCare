@@ -31,15 +31,15 @@ stages:
           - powershell: |
               ionic cap build android --no-open
               npx cap sync android
-              #cd android
+              cd android
               ./gradlew assemble$(buildConfiguration)
-            workingDirectory: $(Build.SourcesDirectory)/$(projectName)/android
+            workingDirectory: $(Build.SourcesDirectory)/$(projectName)
             displayName: 'Build Android Project'
 
           - task: Gradle@2
             displayName: 'Building Android App'
             inputs:
-              workingDirectory: $(Build.SourcesDirectory)/$(projectName)/android
+              workingDirectory: $(Build.SourcesDirectory)/$(projectName)
               gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/android/gradlew
               gradleOptions: '-Xmx3072m'
               publishJUnitResults: false

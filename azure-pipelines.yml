@@ -28,11 +28,23 @@ stages:
               command: install
             displayName: 'NPM Install'
 
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                pwd
+                ls -la $(Build.SourcesDirectory)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/andriod/
+                echo "***********************************************************"
+          
           - powershell: |
               ionic cap build android --no-open
               npx cap sync android
-              cd android
-              ./gradlew assemble$(buildConfiguration)
+              #cd android
+              #./gradlew assemble$(buildConfiguration)
             workingDirectory: $(Build.SourcesDirectory)/$(projectName)
             displayName: 'Build Android Project'
 

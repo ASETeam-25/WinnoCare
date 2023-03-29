@@ -39,8 +39,8 @@ stages:
           - task: Gradle@2
             displayName: 'Building Android App'
             inputs:
-              workingDirectory: '$(workingDirectory)'
-              gradleWrapperFile: '$(workingDirectory)/gradlew'
+              workingDirectory: $(Build.SourcesDirectory)/$(projectName)
+              gradleWrapperFile: '$(Build.SourcesDirectory)/$(projectName)/gradlew'
               gradleOptions: '-Xmx3072m'
               publishJUnitResults: false
               testResultsFiles: '**/TEST-*.xml'

@@ -27,25 +27,13 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/$(projectName)'
               command: install
             displayName: 'NPM Install'
-
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: |
-                pwd
-                ls -la $(Build.SourcesDirectory)
-                echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)
-                echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)/andriod/
-                echo "***********************************************************"
           
           - powershell: |
               ionic cap build android --no-open
               npx cap sync android
               #cd android
-              #./gradlew assemble$(buildConfiguration)
-            workingDirectory: $(Build.SourcesDirectory)/$(projectName)
+              ./gradlew assemble$(buildConfiguration)
+            workingDirectory: $(Build.SourcesDirectory)/$(projectName)/android
             displayName: 'Build Android Project'
 
           - task: Bash@3
@@ -57,13 +45,13 @@ stages:
                 echo "***********************************************************"
                 ls -la $(Build.SourcesDirectory)/$(projectName)
                 echo "***********************************************************"
-                ls -la $(Build.SourcesDirectory)/$(projectName)/andriod/
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/
                 echo "***********************************************************"
           - task: Gradle@2
             displayName: 'Building Android App'
             inputs:
-              workingDirectory: $(Build.SourcesDirectory)/$(projectName)/
-              gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/gradlew
+              workingDirectory: $(Build.SourcesDirectory)/$(projectName)/android
+              gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/android/gradlew
               gradleOptions: '-Xmx3072m'
               publishJUnitResults: false
               testResultsFiles: '**/TEST-*.xml'

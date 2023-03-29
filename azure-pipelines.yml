@@ -24,7 +24,7 @@ stages:
 
           - task: Npm@1
             inputs:
-              workingDir: '$(Build.SourcesDirectory)/$(projectName)/android'
+              workingDir: '$(Build.SourcesDirectory)/$(projectName)'
               command: install
             displayName: 'NPM Install'
 
@@ -39,7 +39,7 @@ stages:
           - task: Gradle@2
             displayName: 'Building Android App'
             inputs:
-              workingDirectory: $(Build.SourcesDirectory)/$(projectName)
+              #workingDirectory: $(Build.SourcesDirectory)/$(projectName)
               gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/android/gradlew
               gradleOptions: '-Xmx3072m'
               publishJUnitResults: false

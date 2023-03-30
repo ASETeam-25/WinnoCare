@@ -82,3 +82,19 @@ stages:
               TargetFolder: '$(build.artifactStagingDirectory)'
           - task: PublishBuildArtifacts@1
             displayName: 'Publish Artifact: Drop'
+          
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Install gdrive CLI tool
+                wget -O gdrive https://drive.google.com/uc?id=1dIcwdb0N8N-NSPQ2DhZo51OZ2gX89zwR
+                chmod +x gdrive
+                sudo install gdrive /usr/local/bin/gdrive
+
+                # Authenticate gdrive CLI tool
+                gdrive about
+
+                # Upload APK file to Google Drive
+                gdrive upload '$(build.artifactStagingDirectory)'
+            displayName: 'Upload APK to Google Drive'

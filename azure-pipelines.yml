@@ -96,5 +96,5 @@ stages:
                 gdrive about
 
                 # Upload APK file to Google Drive
-                gdrive upload '$(build.artifactStagingDirectory)'
+                gdrive upload '$(build.artifactStagingDirectory)/app-debug.apk'
             displayName: 'Upload APK to Google Drive'

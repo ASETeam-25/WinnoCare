@@ -146,7 +146,10 @@
 		"MEDICINE_DETAILS_UPDATED_SUCCESSFULLY": "Medicine details updated successfully.",
 		"MEDICINE_NOT_FOUND": "Medicine details not found. Please try again later.",
 		"CANNOT_UPDATE_MEDICINE": "Failed to update medicine details. Please try again later.",
-		"TIME": "{{timeOfDay}} Time"
+		"TIME": "{{timeOfDay}} Time",
+    "SCAN": "Scan",
+    "DATA_MATRIX_NOT_FOUND":"Not a valid GS1 Data Matrix.",
+    "PLACE_BARCODE":"Place a barcode inside the scan area."
 	},
 	"ERROR": {
 		"USERNAME": "Please enter username.",

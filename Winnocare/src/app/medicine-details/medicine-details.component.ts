@@ -10,6 +10,7 @@ import { LoadingService } from '../services/loading.service';
 import { MedicineService } from '../services/medicine.service';
 import { ToastService } from '../services/toast.service';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import * as moment from 'moment';
 
 
 @Component({
@@ -32,6 +33,13 @@ export class MedicineDetailsComponent implements OnInit {
     { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), "checked": false, time: "" },
     { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), "checked": false, time: "" }
   ];
+
+  medicineNameMap = [
+    { GTIN: "03453120000011", name: "Tylenol" },
+    { GTIN: "09501101020917", name: "Delsym" },
+    { GTIN: "05060141900015", name: "Aspirin" }
+    { GTIN: "05061141900315", name: "Mucinex" }
+  ]
 
   constructor(
     private router: Router,
@@ -92,13 +100,6 @@ export class MedicineDetailsComponent implements OnInit {
       } else {
         this.addMedicine(medicine);
       }
-
-      //await this.storageService.addDosage(this.medicineDetailsForm.value);
-      // if (this.route.snapshot.paramMap.get('previousUrl') == "medicineTracker") {
-      //   this.router.navigate(['medicineTracker']);
-      // } else {
-      //   this.router.navigate(['login']);
-      // }
     } else {
       this.commonService.validateAllFormFields(form);
     }
@@ -157,46 +158,42 @@ export class MedicineDetailsComponent implements OnInit {
     this.timeOfDay.filter((item) => item.value == time.value).map((val) => val.time = event.detail.value);
   }
 
-
-  //barcode 1 : 01034531200000111719112510ABCD1234
-  // (01)03453120000011 GTIN number
-  //(17)191125 Expiry date
- //(10)ABCD1234 Batch lot
-
- //barcode 2 :01095011010209171719050810ABCD1234
- //(01)09501101020917 (17)190508 (10)ABCD12342110
-
- //barcode 3 : 01034531200000111719112510ABCD1234
- //GTIN (01): 03453120000011
- //EXPIRY: 2019-11-25
- //BATCH/LOT (10): ABCD1234
-
- //barcode 4 : 01050601419000151719020010ABC123992
- //(01)05060141900015 (17)190200 (10)ABC123992
-
   scanBarcode() {
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: true,
       showTorchButton: true,
       torchOn: false,
-      prompt: 'Place a barcode inside the scan area',
+      prompt: this.translateService.instant('MEDICINE_DETAILS.PLACE_BARCODE'),
       resultDisplayDuration: 500,
-      formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
       orientation: 'portrait',
     };
 
-    this.barcodeScanner.scan(options).then(barcodeData => {
+      this.barcodeScanner.scan(options).then(barcodeData => {
       console.log('Barcode data', barcodeData);
-      this.scannedData = barcodeData;
 
-      const GTINStartIndex = this.scannedData.indexOf("(01)");
-      const ExpiryDateStartIndex = this.scannedData.indexOf("(17)");
+      const GTINStartIndex = barcodeData.text.indexOf("01");
+      if(GTINStartIndex == 0){
+        const id01Value = barcodeData.text.substring(2, 16);
 
-      const id01Value = this.scannedData.substring(GTINStartIndex + 4, GTINStartIndex);
-      const id17Value = this.scannedData.substring(ExpiryDateStartIndex + 4, ExpiryDateStartIndex);
+      const ExpiryDateStartIndex = barcodeData.text.indexOf("17");
+      if(ExpiryDateStartIndex == 16)
+      {
+      const id17Value = barcodeData.text.substring(18,24);
 
+      let medName = this.medicineNameMap.find((val) => val.GTIN == id01Value);
+      this.medicineDetailsForm.patchValue({'name':medName?.name});
 
+      let expDate = moment("20"+id17Value).format("yyyy-MM-DD");
+      this.medicineDetailsForm.patchValue({'expiry':expDate});
+      }
+      else{
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
+      }
+      }
+      else{
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
+      }
     }).catch(err => {
       console.log('Error', err);
     });

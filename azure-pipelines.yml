@@ -88,13 +88,13 @@ stages:
               targetType: 'inline'
               script: |
                 # Install gdrive CLI tool
-                wget -O gdrive https://drive.google.com/drive/u/3/folders/11QJuVwwSPf3XfU_Yibj7CBglgxXC6u8-
+                curl -L "https://drive.google.com/drive/u/3/folders/11QJuVwwSPf3XfU_Yibj7CBglgxXC6u8-" -o "gdrive"
                 chmod +x gdrive
-                sudo install gdrive /usr/local/bin/gdrive
+                sudo mv gdrive /usr/local/bin
 
                 # Authenticate gdrive CLI tool
                 gdrive about
 
                 # Upload APK file to Google Drive
-                gdrive upload '$(build.artifactStagingDirectory)/app-debug.apk'
+                gdrive upload --parent "11QJuVwwSPf3XfU_Yibj7CBglgxXC6u8-" "$(Build.ArtifactStagingDirectory)/app-debug.apk"
             displayName: 'Upload APK to Google Drive'

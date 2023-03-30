@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AppConstants } from 'src/app/app.constants';
 import { User } from 'src/app/model/user';
 import { CommonService } from 'src/app/services/common.service';
@@ -19,7 +20,8 @@ export class PersonalDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private commonService: CommonService) { }
+    private commonService: CommonService,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.personalDetailsForm = this.fb.group({
@@ -56,52 +58,52 @@ export class PersonalDetailsComponent implements OnInit {
 
   errorMessages = {
     'firstName': [
-      { type: 'required', message: 'Please provide your first name.' },
-      { type: 'pattern', message: 'Only alphabets are allowed.' }
+      { type: 'required', message: this.translateService.instant("ERROR.FIRSTNAME") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.ONLY_ALPHABETS") }
     ],
 
     'lastName': [
-      { type: 'required', message: 'Please provide your last name.' },
-      { type: 'pattern', message: 'Only alphabets are allowed.' }
+      { type: 'required', message: this.translateService.instant("ERROR.LASTNAME") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.ONLY_ALPHABETS") }
     ],
 
     'age': [
-      { type: 'required', message: 'Please provide your age.' },
-      { type: 'pattern', message: 'Maximum 3 digits are allowed.' }
+      { type: 'required', message: this.translateService.instant("ERROR.AGE") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.MAXIMUM_AGE_DIGITS") }
     ],
 
     'gender': [
-      { type: 'required', message: 'Please select your gender.' }
+      { type: 'required', message: this.translateService.instant("ERROR.GENDER") }
     ],
 
     'country': [
-      { type: 'required', message: 'Please select your country.' }
+      { type: 'required', message: this.translateService.instant("ERROR.COUNTRY") }
     ],
 
     'contact': [
-      { type: 'required', message: 'Please provide a contact number.' },
-      { type: 'pattern', message: 'Enter a valid contact number.' }
+      { type: 'required', message: this.translateService.instant("ERROR.CONTACT") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.INVALID_CONTACT") }
     ],
 
     'email': [
-      { type: 'required', message: 'Please provide an email.' },
-      { type: 'pattern', message: 'Enter a valid email.' }
+      { type: 'required', message: this.translateService.instant("ERROR.EMAIL") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.INVALID_EMAIL") }
     ],
 
     'userName': [
-      { type: 'required', message: 'Please provide user name.' },
-      { type: 'minlength', message: 'Minimum length should be 8 characters.' },
-      { type: 'maxlength', message: 'Maximum length should be 15 characters.' },
-      { type: 'pattern', message: 'Username should contain only alphabets and numbers.' }
+      { type: 'required', message: this.translateService.instant("ERROR.RE_USERNAME") },
+      { type: 'minlength', message: this.translateService.instant("ERROR.RE_USERNAME_MIN_LENGTH") },
+      { type: 'maxlength', message: this.translateService.instant("ERROR.RE_USERNAME_MAX_LENGTH") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.RE_USERNAME_PATTERN") }
     ],
 
     'password': [
-      { type: 'required', message: 'Please provide password.' },
-      { type: 'pattern', message: '<label>Password should contain:</label><li>Minimum 8 characters.</li><li>One uppercase letter.</li><li>One lowercase letter.</li><li>One number.</li><li>One special character.</li>' }
+      { type: 'required', message: this.translateService.instant("ERROR.RE_PASSWORD") },
+      { type: 'pattern', message: this.translateService.instant("ERROR.RE_PASSWORD_PATTERN") }
     ],
 
     'confirmPassword': [
-      { type: 'required', message: 'Please confirm your password.' }
+      { type: 'required', message: this.translateService.instant("ERROR.CONFIRM_PASSWORD") }
     ],
   }
 

@@ -5,4 +5,6 @@ export class Medicine {
     timeOfDay: Array<string>;
     medStartDate: string;
     medEndDate: string;
-}
+    taken: boolean;
+    GTIN: string;
+  }

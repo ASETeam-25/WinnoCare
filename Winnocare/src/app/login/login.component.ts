@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Error } from '../model/error';
 import { AuthenticationService } from '../services/authentication.service';
 import { CommonService } from '../services/common.service';
@@ -17,6 +18,9 @@ import { UserService } from '../services/user.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loadedStrs: Array<string> = [];
+  sosContact: any;
+  disableSos: boolean = false;
 
   constructor(
     private router: Router,
@@ -26,17 +30,30 @@ export class LoginComponent implements OnInit {
     private toastService: ToastService,
     private fb: FormBuilder,
     private commonService: CommonService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
-    })
+    });
   }
 
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
+    if (localStorage.getItem("SOS") && localStorage.getItem("EmergencyContacts")) {
+      if (localStorage.getItem("SOS") == "true") {
+        let result = JSON.parse(localStorage.getItem("EmergencyContacts") || "");
+        let defaultContact = result["defultContact"];
+        this.sosContact = result[defaultContact];
+        this.disableSos = false;
+      } else {
+        this.disableSos = true;
+      }
+    } else {
+      this.disableSos = true;
+    }
   }
 
   ionViewDidLeave() {
@@ -45,7 +62,7 @@ export class LoginComponent implements OnInit {
 
   async validateForm(form: FormGroup) {
     if (form.valid) {
-      await this.loadingService.showLoading("Logging in...");
+      await this.loadingService.showLoading(this.translateService.instant("LOGIN.LOGGING_IN"));
       this.authService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value).subscribe({
         next: (res) => {
           this.userService.setUsername(this.loginForm.get('username')?.value);
@@ -53,7 +70,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['dashboard']);
         }, error: (error: Error) => {
           this.loadingService.dismissLoading();
-          this.toastService.showToast('bottom', 'Login Failed. Please check username and password.');
+          this.toastService.showToast('bottom', this.translateService.instant("LOGIN.LOGIN_FAILED"));
         }
       });
     } else {

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Register</ion-title>
+    <ion-title>{{'REGISTER.REGISTER' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -12,13 +12,14 @@
 
       <ion-item-group>
         <ion-item-divider class="ion-item-divider-first">
-          <ion-label>
-            Personal Details
+          <ion-label text-wrap>
+            {{'REGISTER.PERSONAL_DETAILS' | translate}}
           </ion-label>
         </ion-item-divider>
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Firstname</ion-label>
-          <ion-input formControlName="firstName" type="text" placeholder="Enter first name" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.FIRSTNAME' | translate}}</ion-label>
+          <ion-input formControlName="firstName" type="text"
+            placeholder="{{'REGISTER.ENTER_FIRST_NAME' | translate}}" />
         </ion-item>
         <div class="error-label">
           <ng-container *ngFor="let error of errorMessages.firstName">
@@ -30,8 +31,8 @@
         </div>
 
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Lastname</ion-label>
-          <ion-input formControlName="lastName" type="text" placeholder="Enter last name" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.LASTNAME'| translate}}</ion-label>
+          <ion-input formControlName="lastName" type="text" placeholder="{{'REGISTER.ENTER_LAST_NAME' | translate}}" />
         </ion-item>
         <div class="error-label">
           <ng-container *ngFor="let error of errorMessages.lastName">
@@ -43,8 +44,8 @@
         </div>
 
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Age</ion-label>
-          <ion-input formControlName="age" type="number" placeholder="Enter your age" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.AGE' | translate}}</ion-label>
+          <ion-input formControlName="age" type="number" placeholder="{{'REGISTER.ENTER_YOUR_AGE' | translate}}" />
         </ion-item>
         <div class="error-label">
           <ng-container *ngFor="let error of errorMessages.age">
@@ -56,11 +57,12 @@
         </div>
 
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Gender</ion-label>
-          <ion-select interface="popover" placeholder="Select your gender" formControlName="gender">
-            <ion-select-option value="Male">Male</ion-select-option>
-            <ion-select-option value="Female">Female</ion-select-option>
-            <ion-select-option value="Other">Other</ion-select-option>
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.GENDER'| translate}}</ion-label>
+          <ion-select interface="popover" placeholder="{{'REGISTER.SELECT_YOUR_GENDER' | translate}}"
+            formControlName="gender">
+            <ion-select-option value="{{'REGISTER.MALE' | translate}}">{{'REGISTER.MALE' | translate}}</ion-select-option>
+            <ion-select-option value="{{'REGISTER.FEMALE' | translate}}">{{'REGISTER.FEMALE' | translate}}</ion-select-option>
+            <ion-select-option value="{{'REGISTER.OTHER' | translate}}">{{'REGISTER.OTHER' | translate}}</ion-select-option>
           </ion-select>
         </ion-item>
         <div class="error-label">
@@ -75,13 +77,14 @@
 
       <ion-item-group>
         <ion-item-divider class="ion-item-divider">
-          <ion-label>
-            Contact Details
+          <ion-label text-wrap>
+            {{'REGISTER.CONTACT_DETAILS'| translate}}
           </ion-label>
         </ion-item-divider>
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Country</ion-label>
-          <ion-select interface="popover" placeholder="Select your country" formControlName="country">
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.COUNTRY'| translate}}</ion-label>
+          <ion-select interface="popover" placeholder="{{'REGISTER.SELECT_YOUR_COUNTRY' | translate}}"
+            formControlName="country">
             <ion-select-option *ngFor="let country of countryList"
               [value]="country">{{country.name}}</ion-select-option>
           </ion-select>
@@ -96,9 +99,9 @@
         </div>
 
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Contact</ion-label>
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.CONTACT'| translate}}</ion-label>
           {{personalDetailsForm.get('country')?.value.dial_code}}
-          <ion-input formControlName="contact" type="tel" placeholder="Enter your number" />
+          <ion-input formControlName="contact" type="tel" placeholder="{{'REGISTER.ENTER_YOUR_NUMBER' | translate}}" />
         </ion-item>
         <div class="error-label">
           <ng-container *ngFor="let error of errorMessages.contact">
@@ -110,8 +113,8 @@
         </div>
 
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Email</ion-label>
-          <ion-input formControlName="email" type="email" placeholder="Enter your email" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.EMAIL'| translate}}</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="{{'REGISTER.ENTER_YOUR_EMAIL' | translate}}" />
         </ion-item>
         <div class="error-label">
           <ng-container *ngFor="let error of errorMessages.email">
@@ -125,13 +128,14 @@
 
       <ion-item-group>
         <ion-item-divider class="ion-item-divider">
-          <ion-label>
-            Create User
+          <ion-label text-wrap>
+            {{'REGISTER.CREATE_USER'| translate}}
           </ion-label>
         </ion-item-divider>
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Username</ion-label>
-          <ion-input formControlName="userName" type="text" placeholder="Create your username" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'COMMON.USERNAME'| translate}}</ion-label>
+          <ion-input formControlName="userName" type="text"
+            placeholder="{{'REGISTER.CREATE_YOUR_USERNAME' | translate}}" />
         </ion-item>
         <div class="error">
           <ng-container *ngFor="let error of errorMessages.userName">
@@ -143,8 +147,9 @@
         </div>
 
         <ion-item>
-          <ion-label position="fixed" class="textDecor">Password</ion-label>
-          <ion-input formControlName="password" type="text" placeholder="Create your password" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'COMMON.PASSWORD'| translate}}</ion-label>
+          <ion-input formControlName="password" type="text"
+            placeholder="{{'REGISTER.CREATE_YOUR_PASSWORD' | translate}}" />
         </ion-item>
         <div class="error">
           <ng-container *ngFor="let error of errorMessages.password">
@@ -156,8 +161,10 @@
         </div>
 
         <ion-item>
-          <ion-label text-wrap position="fixed" class="textDecor">Confirm Password</ion-label>
-          <ion-input formControlName="confirmPassword" type="text" placeholder="Confirm your password" />
+          <ion-label text-wrap position="fixed" class="textDecor">{{'COMMON.CONFIRM_PASSWORD' |
+            translate}}</ion-label>
+          <ion-input formControlName="confirmPassword" type="text"
+            placeholder="{{'REGISTER.CONFIRM_YOUR_PASSWORD' | translate}}" />
         </ion-item>
         <div class="error-label">
           <ng-container *ngFor="let error of errorMessages.confirmPassword">
@@ -170,7 +177,7 @@
 
         <div class="error-label">
           <div *ngIf="personalDetailsForm.get('confirmPassword')?.dirty && personalDetailsForm.errors">
-            Passwords don't match. Please try again.
+            {{'ERROR.PASSWORDS_DONT_MATCH' | translate}}
           </div>
         </div>
       </ion-item-group>
@@ -179,5 +186,7 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-button type="submit" (click)="validateForm(personalDetailsForm)" expand="block" size="large">Next</ion-button>
+  <ion-button type="submit" class="ion-text-wrap" (click)="validateForm(personalDetailsForm)" expand="block"
+    size="large">{{'REGISTER.NEXT'|
+    translate}}</ion-button>
 </ion-footer>

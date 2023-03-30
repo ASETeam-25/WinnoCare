@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">my-app</string>
-    <string name="title_activity_main">my-app</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Winnocare</string>
+    <string name="title_activity_main">Winnocare</string>
+    <string name="package_name">com.ase.winnocare</string>
+    <string name="custom_url_scheme">com.ase.winnocare</string>
 </resources>

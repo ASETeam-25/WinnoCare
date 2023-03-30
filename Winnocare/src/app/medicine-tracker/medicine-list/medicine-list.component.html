@@ -2,17 +2,29 @@
   <ion-toolbar color="primary"></ion-toolbar>
 </ion-header>
 <ion-content>
+  <div class="error-no-data" *ngIf="existingDosage.length == 0">
+    <ion-label>{{'MEDICINE_TRACKER.NO_DATA_AVAILABLE' | translate}}</ion-label>
+  </div>
   <div class="medicine-list-container">
-    <ion-label *ngIf="existingDosage.length == 0">No Data available. Please add your medicine dosage.</ion-label>
     <ion-list>
-      <ion-item *ngFor="let item of existingDosage; let i = index">
-        <ion-label>{{item.name}}</ion-label>
-        <div slot="end" style="display: inherit;">
-          <ion-label>Not Taken</ion-label>
-          <ion-toggle [checked]="item.taken" (ionChange)="medicineTaken(item)" color="success"></ion-toggle>
-          <ion-label>Taken</ion-label>
-        </div>
-      </ion-item>
+      <ion-item-sliding *ngFor="let item of existingDosage; let i = index">
+        <ion-item>
+          <ion-label (click)="navigateToMedicineDetails(item)">{{item.medicineName}}</ion-label>
+          <div slot="end" style="display: inherit;">
+            <ion-label>{{'MEDICINE_TRACKER.MEDICINE_NOT_TAKEN' | translate}}</ion-label>
+            <ion-toggle [checked]="item.taken" (ionChange)="medicineTaken(item)" color="success"></ion-toggle>
+            <ion-label>{{'MEDICINE_TRACKER.MEDICINE_TAKEN' | translate}}</ion-label>
+          </div>
+          <!-- <div slot="end" style="display: inherit;">
+            <ion-label>{{item.medEndDate}}</ion-label>
+          </div> -->
+        </ion-item>
+
+        <ion-item-options>
+          <ion-item-option (click)="deleteMedicine(item)" color="danger">{{'MEDICINE_TRACKER.DELETE' |
+            translate}}</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </div>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

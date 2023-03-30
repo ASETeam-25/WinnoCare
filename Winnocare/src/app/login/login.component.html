@@ -1,46 +1,50 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Welcome</ion-title>
+    <ion-title>{{ 'LOGIN.WELCOME' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="login-container">
-    <ion-img src="assets\img\winnovateSystemsLogo.png" class="center"></ion-img>
+    <ion-img src="assets\img\SOSEmergencyCalligIcon.png" class="center"></ion-img>
     <form [formGroup]="loginForm" (ngSubmit)="validateForm(loginForm)">
 
       <ion-item>
-        <ion-label position="fixed" class="textDecor">Username</ion-label>
-        <ion-input formControlName="username" type="text" placeholder="Enter username" />
+        <ion-label text-wrap position="fixed" class="textDecor">{{ 'COMMON.USERNAME' | translate }}</ion-label>
+        <ion-input formControlName="username" type="text" placeholder="{{'COMMON.ENTER_USERNAME' | translate}}" />
       </ion-item>
       <div class="error-label">
         <div
           *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)">
-          Please enter username.
+          {{ 'ERROR.USERNAME' | translate }}
         </div>
       </div>
 
       <ion-item>
-        <ion-label position="fixed" class="textDecor">Password</ion-label>
-        <ion-input formControlName="password" type="password" placeholder="Enter password" />
+        <ion-label text-wrap position="fixed" class="textDecor">{{ 'COMMON.PASSWORD' | translate }}</ion-label>
+        <ion-input formControlName="password" type="password" placeholder="{{'LOGIN.ENTER_PASSWORD' | translate}}" />
       </ion-item>
       <div class="error-label">
         <div
           *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
-          Please enter password.
+          {{ 'ERROR.PASSWORD' | translate }}
         </div>
       </div>
 
       <div class="div-forgot-password">
-        <a class="link-forgot-password" [routerLink]="['/forgotPassword']">Forgot Password?</a>
+        <a class="link-forgot-password" [routerLink]="['/forgotPassword']">{{ 'LOGIN.FORGOT_PASSWORD' | translate }}</a>
       </div>
 
       <div class="btn-actions">
-        <ion-button class="btn" (click)="register()" size="large">Register</ion-button>
-        <ion-button class="btn" type="submit" size="large">Login</ion-button>
+        <ion-button class="btn ion-text-wrap" (click)="register()" size="large">
+          {{ 'LOGIN.REGISTER' | translate }}
+        </ion-button>
+        <ion-button class="btn ion-text-wrap" type="submit" size="large">{{ 'LOGIN.LOGIN' | translate }}</ion-button>
       </div>
 
     </form>
 
-    <ion-button shape="round" color="danger" size="large">SOS</ion-button>
+    <ion-button href="tel:{{sosContact}}" disabled={{disableSos}} shape="round" color="danger" size="large">
+      {{ 'COMMON.SOS' | translate }}
+    </ion-button>
   </div>
 </ion-content>

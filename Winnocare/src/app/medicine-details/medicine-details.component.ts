@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Error } from 'src/app/model/error';
 import { StorageService } from 'src/app/services/storage.service';
 import { Medicine } from '../model/medicine';
-import { Error } from 'src/app/model/error';
 import { CommonService } from '../services/common.service';
 import { LoadingService } from '../services/loading.service';
-import { UserService } from '../services/user.service';
+import { MedicineService } from '../services/medicine.service';
 import { ToastService } from '../services/toast.service';
+import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-medicine-details',
@@ -17,24 +21,37 @@ import { ToastService } from '../services/toast.service';
 export class MedicineDetailsComponent implements OnInit {
 
   medicineDetailsForm: FormGroup;
+  scannedData: any;
+  encodedData: '';
+  encodeData: any;
+  inputData: any;
   existingDosage = [];
 
   timeOfDay = [
-    { "value": "Morning", "checked": false },
-    { "value": "Afternoon", "checked": false },
-    { "value": "Evening", "checked": false },
-    { "value": "Night", "checked": false },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), "checked": false, time: "" }
   ];
+
+  medicineNameMap = [
+    { GTIN: "03453120000011", name: "Tylenol" },
+    { GTIN: "09501101020917", name: "Delsym" },
+    { GTIN: "05060141900015", name: "Aspirin" }
+    { GTIN: "05061141900315", name: "Mucinex" }
+  ]
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private storageService: StorageService,
-    private userService: UserService,
+    private medicineService: MedicineService,
     private commonService: CommonService,
     private loadingService: LoadingService,
-    private toastService: ToastService) { }
+    private toastService: ToastService,
+    private barcodeScanner: BarcodeScanner,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.medicineDetailsForm = this.fb.group({
@@ -46,6 +63,22 @@ export class MedicineDetailsComponent implements OnInit {
       endDate: ['', Validators.required],
       taken: [false]
     });
+
+    if (this.route.snapshot.paramMap.get('medicineDetails') != null) {
+      let medicineData: Medicine = JSON.parse(this.route.snapshot.paramMap.get('medicineDetails') || '');
+      if (medicineData != null || medicineData != '') {
+        this.medicineDetailsForm.setValue({
+          name: medicineData.medicineName,
+          expiry: medicineData.expiryDate,
+          frequency: medicineData.frequency,
+          timeOfDay: medicineData.timeOfDay,
+          startDate: medicineData.medStartDate,
+          endDate: medicineData.medEndDate,
+          taken: [false]
+        });
+        this.timeOfDay.filter(o1 => medicineData.timeOfDay.some(o2 => o1.value === o2)).map(val => val.checked = true);
+      }
+    }
   }
 
   updateTimeOfDay(event) {
@@ -61,30 +94,53 @@ export class MedicineDetailsComponent implements OnInit {
   async validateForm(form: FormGroup) {
     if (form.valid) {
       let medicine: Medicine = this.mapData(form);
-      await this.loadingService.showLoading("Please wait...");
-      this.userService.addMedicine(medicine).subscribe({
-        next: (res) => {
-          this.loadingService.dismissLoading();
-          this.router.navigate(['medicineTracker']);
-          this.toastService.showToast('bottom', 'Medicine details saved successfully.');
-        }, error: (error: Error) => {
-          this.loadingService.dismissLoading();
-          if (error.errorMessage.includes("Medicine already added!")) {
-            this.toastService.showToast('bottom', 'Medicine is already added. Please try editing the medicine.');
-          } else {
-            this.toastService.showToast('bottom', 'Cannot add medicine. Please try again later.');
-          }
-        }
-      })
-      //await this.storageService.addDosage(this.medicineDetailsForm.value);
-      // if (this.route.snapshot.paramMap.get('previousUrl') == "medicineTracker") {
-      //   this.router.navigate(['medicineTracker']);
-      // } else {
-      //   this.router.navigate(['login']);
-      // }
+      await this.loadingService.showLoading(this.translateService.instant("COMMON.PLEASE_WAIT"));
+      if (this.route.snapshot.paramMap.get('medicineDetails') != null) {
+        this.updateMedicine(medicine);
+      } else {
+        this.addMedicine(medicine);
+      }
     } else {
       this.commonService.validateAllFormFields(form);
     }
+  }
+
+  addMedicine(medicine: Medicine) {
+    this.medicineService.addMedicine(medicine).subscribe({
+      next: (res) => {
+        this.loadingService.dismissLoading();
+        if (this.route.snapshot.paramMap.get('previousUrl') === "dashboard") {
+          this.router.navigate(['dashboard']);
+        } else {
+          this.router.navigate(['medicineTracker']);
+        }
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_SAVED_SUCCESSFULLY"));
+      }, error: (error: Error) => {
+        this.loadingService.dismissLoading();
+        if (error.errorMessage.includes("Medicine already added!")) {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_ALREADY_ADDED"));
+        } else {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_ADD_MEDICINE"));
+        }
+      }
+    })
+  }
+
+  updateMedicine(medicine: Medicine) {
+    this.medicineService.updateMedicine(medicine).subscribe({
+      next: (res) => {
+        this.loadingService.dismissLoading();
+        this.router.navigate(['medicineTracker']);
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_UPDATED_SUCCESSFULLY"));
+      }, error: (error: Error) => {
+        this.loadingService.dismissLoading();
+        if (error.errorMessage.includes("Details Not found")) {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_NOT_FOUND"));
+        } else {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_UPDATE_MEDICINE"));
+        }
+      }
+    })
   }
 
   mapData(form: FormGroup) {
@@ -96,6 +152,51 @@ export class MedicineDetailsComponent implements OnInit {
     medicine.medStartDate = form.get('startDate')?.value;
     medicine.medEndDate = form.get('endDate')?.value;
     return medicine;
+  }
+
+  timeSelected(event: any, time: any) {
+    this.timeOfDay.filter((item) => item.value == time.value).map((val) => val.time = event.detail.value);
+  }
+
+  scanBarcode() {
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: this.translateService.instant('MEDICINE_DETAILS.PLACE_BARCODE'),
+      resultDisplayDuration: 500,
+      orientation: 'portrait',
+    };
+
+      this.barcodeScanner.scan(options).then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+
+      const GTINStartIndex = barcodeData.text.indexOf("01");
+      if(GTINStartIndex == 0){
+        const id01Value = barcodeData.text.substring(2, 16);
+
+      const ExpiryDateStartIndex = barcodeData.text.indexOf("17");
+      if(ExpiryDateStartIndex == 16)
+      {
+      const id17Value = barcodeData.text.substring(18,24);
+
+      let medName = this.medicineNameMap.find((val) => val.GTIN == id01Value);
+      this.medicineDetailsForm.patchValue({'name':medName?.name});
+
+      let expDate = moment("20"+id17Value).format("yyyy-MM-DD");
+      this.medicineDetailsForm.patchValue({'expiry':expDate});
+      }
+      else{
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
+      }
+      }
+      else{
+        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
+      }
+    }).catch(err => {
+      console.log('Error', err);
+    });
   }
 
 }

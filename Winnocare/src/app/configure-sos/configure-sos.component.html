@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'CONFIGURE_SOS.CONFIGURE_SOS' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="configure-sos-container">
+    <ion-item>
+      <ion-label text-wrap position="fixed" class="textDecor">{{'CONFIGURE_SOS.SOS_CONTACT'| translate}}</ion-label>
+      <ion-select interface="popover" [(ngModel)]="defaultContact">
+        <ng-container *ngFor="let contact of contacts; let i = index">
+          <ion-select-option [value]="contact">{{contact.contact}}</ion-select-option>
+        </ng-container>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label text-wrap position="fixed" class="textDecor">{{'CONFIGURE_SOS.Value'| translate}}</ion-label>
+      <div>
+        <ion-label position="fixed" class="contact-value">{{defaultContact.value}}</ion-label>
+      </div>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button class="ion-text-wrap" (click)="updateDefaultContact()" expand="block" size="large">
+    {{'CONFIGURE_SOS.UPDATE' | translate}}</ion-button>
+</ion-footer>

@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.ase.winnocare;
 
 import com.getcapacitor.BridgeActivity;
 

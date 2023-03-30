@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Emergency Details</ion-title>
+    <ion-title>{{'REGISTER.EMERGENCY_DETAILS' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -11,62 +11,68 @@
     <form [formGroup]="emergencyContactsForm" (ngSubmit)="validateForm(emergencyContactsForm)">
 
       <ion-item>
-        <ion-label text-wrap position="fixed" class="textDecor">Emergency Contact 1</ion-label>
-        <ion-input type="tel" formControlName="emergencyContact1" placeholder="Enter emergency contact 1" />
-      </ion-item>
+        <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.EMERGENCY_CONTACT_1' |
+          translate}}</ion-label>
+        <ion-input type="tel" formControlName="emergencyContact1"
+          placeholder="{{'REGISTER.ENTER_EMERGENCY_CONTACT_1' | translate}}" />
+        </ion-item>
       <div class="error-label">
         <div
           *ngIf="emergencyContactsForm.get('emergencyContact1')?.hasError('required') && (emergencyContactsForm.get('emergencyContact1')?.dirty || emergencyContactsForm.get('emergencyContact1')?.touched)">
-          Please provide emergency contact 1.
+          {{'ERROR.EMERGENCY_CONTACT_1' | translate}}
         </div>
         <div
           *ngIf="emergencyContactsForm.get('emergencyContact1')?.hasError('pattern') && (emergencyContactsForm.get('emergencyContact1')?.dirty || emergencyContactsForm.get('emergencyContact1')?.touched)">
-          Enter a valid contact number.
+          {{'ERROR.INVALID_CONTACT' | translate}}
         </div>
       </div>
 
       <ion-item>
-        <ion-label text-wrap position="fixed" class="textDecor">Emergency Contact 2</ion-label>
-        <ion-input type="tel" formControlName="emergencyContact2" placeholder="Enter emergency contact 2" />
+        <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.EMERGENCY_CONTACT_2' |
+          translate}}</ion-label>
+        <ion-input type="tel" formControlName="emergencyContact2"
+          placeholder="{{'REGISTER.ENTER_EMERGENCY_CONTACT_2' | translate}}" />
       </ion-item>
       <div class="error-label">
         <div
           *ngIf="emergencyContactsForm.get('emergencyContact2')?.hasError('required') && (emergencyContactsForm.get('emergencyContact2')?.dirty || emergencyContactsForm.get('emergencyContact2')?.touched)">
-          Please provide emergency contact 2.
+          {{'ERROR.EMERGENCY_CONTACT_2' | translate}}
         </div>
         <div
           *ngIf="emergencyContactsForm.get('emergencyContact2')?.hasError('pattern') && (emergencyContactsForm.get('emergencyContact2')?.dirty || emergencyContactsForm.get('emergencyContact2')?.touched)">
-          Enter a valid contact number.
+          {{'ERROR.INVALID_CONTACT' | translate}}
         </div>
       </div>
 
       <ion-item>
-        <ion-label text-wrap position="fixed" class="textDecor">Doctor Contact 1</ion-label>
-        <ion-input type="tel" formControlName="doctorContact1" placeholder="Enter doctor contact 1" />
+        <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.DOCTOR_CONTACT_1' | translate}}</ion-label>
+        <ion-input type="tel" formControlName="doctorContact1"
+          placeholder="{{'REGISTER.ENTER_DOCTOR_CONTACT_1' | translate}}" />
       </ion-item>
       <div class="error-label">
         <div
           *ngIf="emergencyContactsForm.get('doctorContact1')?.hasError('required') && (emergencyContactsForm.get('doctorContact1')?.dirty || emergencyContactsForm.get('doctorContact1')?.touched)">
-          Please provide doctor contact 1.
+          {{'ERROR.DOCTOR_CONTACT_1' | translate}}
         </div>
         <div
           *ngIf="emergencyContactsForm.get('doctorContact1')?.hasError('pattern') && (emergencyContactsForm.get('doctorContact1')?.dirty || emergencyContactsForm.get('doctorContact1')?.touched)">
-          Enter a valid contact number.
+          {{'ERROR.INVALID_CONTACT' | translate}}
         </div>
       </div>
 
       <ion-item>
-        <ion-label text-wrap position="fixed" class="textDecor">Doctor Contact 2</ion-label>
-        <ion-input type="tel" formControlName="doctorContact2" placeholder="Enter doctor contact 2" />
+        <ion-label text-wrap position="fixed" class="textDecor">{{'REGISTER.DOCTOR_CONTACT_2' | translate}}</ion-label>
+        <ion-input type="tel" formControlName="doctorContact2"
+          placeholder="{{'REGISTER.ENTER_DOCTOR_CONTACT_2' | translate}}" />
       </ion-item>
       <div class="error-label">
         <div
           *ngIf="emergencyContactsForm.get('doctorContact2')?.hasError('required') && (emergencyContactsForm.get('doctorContact2')?.dirty || emergencyContactsForm.get('doctorContact2')?.touched)">
-          Please provide doctor contact 2.
+          {{'ERROR.DOCTOR_CONTACT_2' | translate}}
         </div>
         <div
           *ngIf="emergencyContactsForm.get('doctorContact2')?.hasError('pattern') && (emergencyContactsForm.get('doctorContact2')?.dirty || emergencyContactsForm.get('doctorContact2')?.touched)">
-          Enter a valid contact number.
+          {{'ERROR.INVALID_CONTACT' | translate}}
         </div>
       </div>
 
@@ -74,5 +80,6 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-button (click)="validateForm(emergencyContactsForm)" expand="block" size="large">Done</ion-button>
+  <ion-button class="ion-text-wrap" (click)="validateForm(emergencyContactsForm)" expand="block" size="large">{{'COMMON.DONE' |
+    translate}}</ion-button>
 </ion-footer>

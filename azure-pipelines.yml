@@ -93,8 +93,8 @@ stages:
                 sudo mv gdrive /usr/local/bin
 
                 # Authenticate gdrive CLI tool
-                gdrive about
-
+                gdrive list
+                
                 # Upload APK file to Google Drive
                 gdrive upload --parent "11QJuVwwSPf3XfU_Yibj7CBglgxXC6u8-" "$(Build.ArtifactStagingDirectory)/app-debug.apk"
             displayName: 'Upload APK to Google Drive'

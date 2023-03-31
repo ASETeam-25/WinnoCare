@@ -36,9 +36,9 @@ export class MedicineDetailsComponent implements OnInit {
 
   medicineNameMap = [
     { GTIN: "03453120000011", name: "Tylenol" },
-    { GTIN: "09501101020917", name: "Delsym" },
-    { GTIN: "05060141900015", name: "Aspirin" }
-    { GTIN: "05061141900315", name: "Mucinex" }
+    { GTIN: "09501101020913", name: "Delsym" },
+    { GTIN: "05060141900015", name: "Aspirin" },
+    { GTIN: "05030141900015", name: "Mucinex" }
   ]
 
   constructor(
@@ -117,7 +117,7 @@ export class MedicineDetailsComponent implements OnInit {
         this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_DETAILS_SAVED_SUCCESSFULLY"));
       }, error: (error: Error) => {
         this.loadingService.dismissLoading();
-        if (error.errorMessage.includes("Medicine already added!")) {
+        if (error.errorMessage.includes("Medicine Name already present")) {
           this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.MEDICINE_ALREADY_ADDED"));
         } else {
           this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.CANNOT_ADD_MEDICINE"));

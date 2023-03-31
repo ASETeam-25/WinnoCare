@@ -41,8 +41,8 @@ stages:
               enableTelemetry: false
               rules: |
               {
-               "tokens": {
-                 "compile": {"value": "implementation"}
+                "tokens": {
+                  "compile": {"value": "implementation"}
               }
           }
           

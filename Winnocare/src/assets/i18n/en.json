@@ -92,7 +92,9 @@
 		"ADD_MEDICINE": "Add Medicine",
 		"USER_NOT_FOUND": "User not found. SOS will be disabled.",
 		"EMERGENCY_CONTACT_FAILED": "Unable to get default emergency contact.",
-		"ENABLE": "Enable"
+		"ENABLE": "Enable",
+    "FOLDING_CLOTHES" :"Folding Clothes",
+    "FOLDING_CLOTHES_DESCRIPTION":"Clothes folding through Arduino board."
 	},
 	"CONFIGURE_SOS": {
 		"CONFIGURE_SOS": "Configure SOS",

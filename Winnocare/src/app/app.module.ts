@@ -26,6 +26,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SettingsComponent } from './settings/settings.component';
 import { ConfigureSosComponent } from './configure-sos/configure-sos.component';
+import {FoldingClothesComponent} from './folding-clothes/folding-clothes.component';
 import { ColorModeService } from './services/color-mode.service';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
@@ -44,7 +45,8 @@ export function createTranslateLoader(http: HttpClient) {
     MedicineTrackerComponent,
     ForgotPasswordComponent,
     SettingsComponent,
-    ConfigureSosComponent
+    ConfigureSosComponent,
+    FoldingClothesComponent
   ],
   imports: [
     CommonModule,

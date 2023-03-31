@@ -27,68 +27,70 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/$(projectName)'
               command: install
             displayName: 'NPM Install'
-
+          
           - powershell: |
               ionic cap build android --no-open
-              npx cap sync
+              npx cap copy android
+              npx cap update android
+              npx cap sync android
               cd android
               ./gradlew assemble$(buildConfiguration)
             workingDirectory: $(Build.SourcesDirectory)/$(projectName)
             displayName: 'Build Android Project'
 
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                pwd
+                ls -la $(Build.SourcesDirectory)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/
+                echo "***********************************************************"
+          - task: Gradle@2
+            displayName: 'Building Android App'
+            inputs:
+              workingDirectory: $(Build.SourcesDirectory)/$(projectName)/android
+              gradleWrapperFile: $(Build.SourcesDirectory)/$(projectName)/android/gradlew
+              gradleOptions: '-Xmx1536m'
+              publishJUnitResults: false
+              testResultsFiles: '**/TEST-*.xml'
+              tasks: assemble$(buildConfiguration)
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: 'default'
+
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                pwd
+                ls -la $(Build.SourcesDirectory)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/
+                echo "***********************************************************"
+                ls -la $(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)
+
           - task: CopyFiles@2
+            displayName: 'Copy Files to: Drop'
             inputs:
               SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
-              contents: "**/app-$(buildConfiguration).apk"
-              targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
-            displayName: "Copy unsigned APK to staging directory"
-
+              Contents: "app-$(buildConfiguration).apk"
+              TargetFolder: '$(build.artifactStagingDirectory)'
           - task: PublishBuildArtifacts@1
+            displayName: 'Publish Artifact: Drop'
+        
+          - task: Bash@3
+            displayName: 'Upload file to S3'
             inputs:
-              PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(projectName)"
-              ArtifactName: "$(projectName)"
-              publishLocation: "Container"
-            displayName: "Publish artifacts"
+              targetType: 'inline'
+              script: |
+                aws s3 cp '$(build.artifactStagingDirectory)/app-debug.apk' s3://winnocare --endpoint-url https://winnocare.s3.ca-central-1.wasabisys.com --region ca-central-1 --profile winnocare
 
-      # Release build
-      - job: Build_Ionic_Android_Release
-        variables:
-          - name: buildConfiguration
-            value: Release
-        displayName: Build Release
-        pool:
-          name: default
-          demands:
-          - agent.name -equals Ridhams-MacBook-Air
-        steps:
-              
-        - script: npm install -g @ionic/cli
-          displayName: 'Install Ionic CLI'
 
-        - task: Npm@1
-          inputs:
-            workingDir: '$(Build.SourcesDirectory)/$(projectName)'
-            command: install
-          displayName: 'NPM Install'
 
-        - powershell: |
-            ionic cap build android --prod --no-open
-            npx cap sync
-            cd android
-            ./gradlew assemble$(buildConfiguration)
-          workingDirectory: $(Build.SourcesDirectory)/$(projectName)
-          displayName: 'Build Android Project'
 
-        - task: CopyFiles@2
-          inputs:
-            SourceFolder: '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/$(buildConfiguration)'
-            contents: "**/$(projectName)-$(buildConfiguration).apk"
-            targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
-          displayName: "Copy unsigned APK to staging directory"
 
-        - task: PublishBuildArtifacts@1
-          inputs:
-            PathtoPublish: "$(Build.ArtifactStagingDirectory)/$(projectName)"
-            ArtifactName: "$(projectName)"
-            publishLocation: "Container"
-          displayName: "Publish artifacts"

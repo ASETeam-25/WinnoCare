@@ -22,30 +22,6 @@ stages:
         steps:   
           - script: npm install -g @ionic/cli
             displayName: 'Install Ionic CLI'
-
-          - task: Npm@1
-            inputs:
-              workingDir: '$(Build.SourcesDirectory)/$(projectName)'
-              command: install
-            displayName: 'NPM Install'
-          
-          - task: ReplaceTokens@5
-            inputs:
-              targetFiles: '**/build.gradle'
-              encoding: 'auto'
-              writeBOM: true
-              actionOnMissing: 'warn'
-              keepToken: false
-              tokenPrefix: '#{'
-              tokenSuffix: '}#'
-              enableTelemetry: false
-              rules: |
-                [
-                  {
-                    "token": "compile",
-                    "value": "implementation"
-                  }
-                ]
           
           - powershell: |
               ionic cap build android --no-open

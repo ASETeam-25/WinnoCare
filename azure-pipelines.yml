@@ -23,6 +23,12 @@ stages:
           - script: npm install -g @ionic/cli
             displayName: 'Install Ionic CLI'
           
+          - task: Npm@1
+            inputs:
+              workingDir: '$(Build.SourcesDirectory)/$(projectName)'
+              command: install
+            displayName: 'NPM Install'
+
           - powershell: |
               ionic cap build android --no-open
               npx cap copy android

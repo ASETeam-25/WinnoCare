@@ -40,12 +40,12 @@ stages:
               tokenSuffix: '}#'
               enableTelemetry: false
               rules: |
-                  [
-                    {
-                      "token": "compile",
-                      "value": "implementation"
-                    }
-                  ]
+                [
+                  {
+                    "token": "compile",
+                    "value": "implementation"
+                  }
+                ]
           
           - powershell: |
               ionic cap build android --no-open

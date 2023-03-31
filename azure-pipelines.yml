@@ -1,4 +1,5 @@
 trigger:
+
 - Azure
 
 variables:
@@ -27,6 +28,23 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/$(projectName)'
               command: install
             displayName: 'NPM Install'
+          
+          - task: ReplaceTokens@5
+            inputs:
+              targetFiles: '**/build.gradle'
+              encoding: 'auto'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              tokenPrefix: '#{'
+              tokenSuffix: '}#'
+              enableTelemetry: false
+              rules: |
+              {
+                "tokens": {
+                  "compile": {"value": "implementation"}
+              }
+          }
           
           - powershell: |
               ionic cap build android --no-open

@@ -188,5 +188,25 @@
 		"TIME_OF_DAY": "Please select time of day.",
 		"START_DATE": "Please select start date.",
 		"END_DATE": "Please select end date."
-	}
+	},
+    "FAQ":{
+            "TITLE":"Resources",
+			"SUBTITLE":"Some useful resources to kill Boredom",
+			"NAV_TEXT":"Give it a Go!",
+			"READMORE":"Read More",
+			"READBOOKS":"Read Some Books",
+			"READBOOKSDES":"Browse through an online library of free to read books",
+			"WATCHANIMETITLE":"Watch Anime",
+			"WATCHANIMEDES":"We know you like Anime, but each anime is not on Netflix",
+			"WATCHANIMEBTN":"Watch Anime that are not on Netflix",
+			"REDDIT":"Not Reddit",
+			"REDDITDES":"But a Subreddit for Lifehacks",
+			"REDDITBTN":"Explore some Lifehacks",
+			"EDURESOURCES":"Useful Resources",
+			"EDURESOURCESDES":"Resources under Resources? IS THIS INCEPTION!!???",
+			"EDURESOURCESBTN":"This one is pretty cool, trust me.",
+			"MHEALTH":"Mental Health Support",
+			"MHEALTHDES":"Are you feeling fine today?",
+			"MHEALTHBTN":"Some useful links for your Mental Health"
+    }
 }

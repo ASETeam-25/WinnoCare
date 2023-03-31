@@ -92,7 +92,10 @@
         "ADD_MEDICINE": "Ajouter un médicament",
         "USER_NOT_FOUND": "Utilisateur introuvable. SOS sera désactivé.",
         "EMERGENCY_CONTACT_FAILED": "Impossible d'obtenir un contact d'urgence par défaut.",
-        "ENABLE": "Activer"
+        "ENABLE": "Activer",
+        "FOLDING_CLOTHES" :"Vêtements pliants",
+        "FOLDING_CLOTHES_DESCRIPTION":"Pliage des vêtements à travers la carte Arduino."
+
     },
     "CONFIGURE_SOS": {
         "CONFIGURE_SOS": "Configurer SOS",

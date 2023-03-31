@@ -8,6 +8,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { SettingsComponent } from './settings/settings.component';
+import { FoldingClothesComponent } from './folding-clothes/folding-clothes.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: 'configureSos',
     component: ConfigureSosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'foldClothes',
+    component: FoldingClothesComponent,
     canActivate: [AuthGuard]
   }
 ];

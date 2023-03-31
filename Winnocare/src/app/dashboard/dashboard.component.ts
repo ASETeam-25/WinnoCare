@@ -42,6 +42,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['configureSos']);
   }
 
+  foldClothes() {
+    this.router.navigate(['foldClothes']);
+  }
+
   bookDoctor() {
     this.router.navigate(['doctorBookings']);
   }

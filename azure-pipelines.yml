@@ -39,12 +39,13 @@ stages:
               tokenPrefix: '#{'
               tokenSuffix: '}#'
               enableTelemetry: false
-              rules: 
-              {
-                "tokens": {
-                  "compile": {"value": "implementation"}
-                }
-          }
+              rules: |
+                  [
+                    {
+                      "token": "compile",
+                      "value": "implementation"
+                    }
+                  ]
           
           - powershell: |
               ionic cap build android --no-open

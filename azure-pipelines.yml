@@ -84,13 +84,11 @@ stages:
             displayName: 'Publish Artifact: Drop'
           
           - task: Bash@3
+            displayName: 'Upload file to S3'
             inputs:
               targetType: 'inline'
               script: |
-                # Authenticate gdrive CLI tool
-                gdrive upload --service-account celestial-sum-382323-66bf6c168542.json "$(Build.ArtifactStagingDirectory)/app-debug.apk"
-                
-                # Upload APK file to Google Drive
-                #gdrive upload --parent "11QJuVwwSPf3XfU_Yibj7CBglgxXC6u8" "$(Build.ArtifactStagingDirectory)/app-debug.apk"
-            displayName: 'Upload APK to Google Drive'
+                aws s3 cp '$(build.artifactStagingDirectory)/app-debug.apk' s3://winnocare --endpoint-url https://winnocare.s3.ca-central-1.wasabisys.com --region ca-central-1 --profile winnocare
+
+
 

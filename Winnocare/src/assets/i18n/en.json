@@ -26,7 +26,8 @@
 		"LOGIN": "Login",
 		"LOGGING_IN": "Logging in...",
 		"LOGIN_FAILED": "Login Failed. Please check username and password.",
-		"ENTER_PASSWORD": "Enter password"
+		"ENTER_PASSWORD": "Enter password",
+    "FOLDING_CLOTHES":"Folding Clothes"
 	},
 	"REGISTER": {
 		"REGISTER": "Register",

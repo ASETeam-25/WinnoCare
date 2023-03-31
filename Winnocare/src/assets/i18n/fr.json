@@ -26,7 +26,8 @@
         "LOGIN": "Connectez-vous",
         "LOGGING_IN": "Connexion...",
         "LOGIN_FAILED": "Échec de la connexion. Veuillez vérifier le nom d'utilisateur et le mot de passe.",
-        "ENTER_PASSWORD": "Entrez le mot de passe"
+        "ENTER_PASSWORD": "Entrez le mot de passe",
+        "FOLDING_CLOTHES":"Vêtements pliants"
     },
     "REGISTER": {
         "REGISTER": "Registre",

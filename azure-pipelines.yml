@@ -83,12 +83,30 @@ stages:
           - task: PublishBuildArtifacts@1
             displayName: 'Publish Artifact: Drop'
           
-          - task: Bash@3
-            displayName: 'Upload file to S3'
+          - task: AzureCLI@2
             inputs:
-              targetType: 'inline'
-              script: |
-                aws s3 cp '$(build.artifactStagingDirectory)/app-debug.apk' s3://winnocare --endpoint-url https://winnocare.s3.ca-central-1.wasabisys.com --region ca-central-1 --profile winnocare
+              azureSubscription: 'Azure for Students'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                # Set variables
+                ACCOUNT_NAME='winnocare'
+                CONTAINER_NAME='$logs'
+                BLOB_NAME='Winnocare'
+                LOCAL_FILE_PATH='$(build.artifactStagingDirectory)/app-debug.apk'
+
+                # Authenticate with Azure CLI
+                az login
+
+                # Upload the file to Azure Storage
+                az storage blob upload \
+                --account-name $ACCOUNT_NAME \
+                --account-key $(az storage account keys list --account-name $ACCOUNT_NAME --query '[0].value' -o tsv) \
+                --container-name $CONTAINER_NAME \
+                --name $BLOB_NAME \
+                --type block \
+                --upload-from $LOCAL_FILE_PATH
+
 
 
 

@@ -39,7 +39,7 @@ stages:
               tokenPrefix: '#{'
               tokenSuffix: '}#'
               enableTelemetry: false
-              rules: |
+              rules: 
               {
                 "tokens": {
                   "compile": {"value": "implementation"}

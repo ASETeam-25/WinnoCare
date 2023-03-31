@@ -88,7 +88,7 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                aws s3 cp '$(Build.SourcesDirectory)/$(projectName)/android/app/build/outputs/apk/app-debug.apk' s3://winnocare --endpoint-url https://winnocare.s3.ca-central-1.wasabisys.com --region ca-central-1 --profile winnocare
+                aws s3 cp '$(build.artifactStagingDirectory)/app-debug.apk' s3://winnocare --endpoint-url https://winnocare.s3.ca-central-1.wasabisys.com --region ca-central-1 --profile winnocare
 
 
 

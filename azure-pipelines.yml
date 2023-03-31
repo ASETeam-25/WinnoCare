@@ -93,8 +93,8 @@ stages:
                 sudo mv gdrive /usr/local/bin
 
                 # Authenticate gdrive CLI tool
-                gdrive about --service-account "$(Build.SourcesDirectory)/celestial-sum-382323-398c939fc5ef.json" echo
-
+                gdrive about --service-account "$(Build.SourcesDirectory)/celestial-sum-382323-398c939fc5ef.json" 
+                
                 # Upload APK file to Google Drive
                 gdrive upload --parent "11QJuVwwSPf3XfU_Yibj7CBglgxXC6u8-" "$(build.ArtifactStagingDirectory)/app-debug.apk" echo
             displayName: 'Upload APK to Google Drive'

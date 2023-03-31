@@ -82,17 +82,7 @@ stages:
               TargetFolder: '$(build.artifactStagingDirectory)'
           - task: PublishBuildArtifacts@1
             displayName: 'Publish Artifact: Drop'
-          
-  - stage: deploy
-    displayName: Deploy
-    jobs:
-    - job: deploy
-      displayName: Deploy
-      pool:
-        name: default
-        demands:
-        - agent.name -equals Ridhams-MacBook-Air
-      steps:
+        
           - task: Bash@3
             displayName: 'Upload file to S3'
             inputs:

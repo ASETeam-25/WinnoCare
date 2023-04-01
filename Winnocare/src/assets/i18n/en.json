@@ -127,7 +127,7 @@
 		"MONDAY": "Monday",
 		"TUESDAY": "Tuesday",
 		"WEDNESDAY": "Wednesday",
-		"THRUSDAY": "Thrusday",
+		"THURSDAY": "Thursday",
 		"FRIDAY": "Friday",
 		"SATURDAY": "Saturday",
 		"SUNDAY": "Sunday",
@@ -190,7 +190,7 @@
 		"END_DATE": "Please select end date."
 	},
     "FAQ":{
-            "TITLE":"Resources",
+      "TITLE":"Resources",
 			"SUBTITLE":"Some useful resources to kill Boredom",
 			"NAV_TEXT":"Give it a Go!",
 			"READMORE":"Read More",

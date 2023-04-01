@@ -1,5 +1,5 @@
 trigger:
-- Dev-clone
+- main
 
 variables:
   projectName: 'Winnocare'

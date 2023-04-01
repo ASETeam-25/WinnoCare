@@ -1,6 +1,5 @@
 trigger:
-
-- Azure
+- Dev-clone
 
 variables:
   projectName: 'Winnocare'

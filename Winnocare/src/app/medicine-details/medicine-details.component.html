@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <!-- <span *ngFor="let time of timeOfDay, let i = index">
+      <span *ngFor="let time of timeOfDay, let i = index">
         <ion-item *ngIf="time.checked">
           <ion-label text-wrap position="fixed" class="textDecor">{{'MEDICINE_DETAILS.TIME' | translate:
             {'timeOfDay':time.value} }}</ion-label>
@@ -87,12 +87,18 @@
 
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime (ionChange)="timeSelected($event, time)" [showDefaultButtons]="true" presentation="time"
+              <ion-datetime formControlName="{{time.code | lowercase }}" (ionChange)="timeSelected($event, time)" [showDefaultButtons]="true" presentation="time"
                 id="{{'datetime'+i}}"></ion-datetime>
             </ng-template>
           </ion-modal>
         </ion-item>
-      </span> -->
+        <div class="error-label" *ngIf="time.checked">
+          <div
+            *ngIf="medicineDetailsForm.get(time.code | lowercase)?.invalid && (medicineDetailsForm.get(time.code | lowercase)?.dirty || medicineDetailsForm.get(time.code | lowercase)?.touched)">
+            {{'ERROR.TIME_OF_DAY' | translate}}
+          </div>
+        </div>
+      </span>
 
       <ion-item>
         <ion-label text-wrap class="textDecor" position="fixed">{{'MEDICINE_DETAILS.START_DATE' |

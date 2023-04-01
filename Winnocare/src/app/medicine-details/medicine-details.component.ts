@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 import { Error } from 'src/app/model/error';
 import { StorageService } from 'src/app/services/storage.service';
 import { Medicine } from '../model/medicine';
@@ -9,8 +11,6 @@ import { CommonService } from '../services/common.service';
 import { LoadingService } from '../services/loading.service';
 import { MedicineService } from '../services/medicine.service';
 import { ToastService } from '../services/toast.service';
-import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-import * as moment from 'moment';
 
 
 @Component({
@@ -29,9 +29,9 @@ export class MedicineDetailsComponent implements OnInit {
 
   timeOfDay = [
     { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), code: "Morning", "checked": false, time: "" },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), code:"Afternoon", "checked": false, time: "" },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), code:"Evening", "checked": false, time: "" },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"),code:"Night", "checked": false, time: "" }
+    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), code: "Afternoon", "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), code: "Evening", "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), code: "Night", "checked": false, time: "" }
   ];
 
   medicineNameMap = [
@@ -61,6 +61,10 @@ export class MedicineDetailsComponent implements OnInit {
       timeOfDay: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      morning: [''],
+      afternoon: [''],
+      evening: [''],
+      night: [''],
       taken: [false]
     });
 
@@ -74,6 +78,10 @@ export class MedicineDetailsComponent implements OnInit {
           timeOfDay: medicineData.timeOfDay,
           startDate: medicineData.medStartDate,
           endDate: medicineData.medEndDate,
+          morning: medicineData.morning,
+          afternoon: medicineData.afternoon,
+          evening: medicineData.evening,
+          night: medicineData.night,
           taken: [false]
         });
         this.timeOfDay.filter(o1 => medicineData.timeOfDay.some(o2 => o1.code === o2)).map(val => val.checked = true);
@@ -84,10 +92,17 @@ export class MedicineDetailsComponent implements OnInit {
   updateTimeOfDay(event) {
     event.checked = !event.checked;
     let medicineTime = this.timeOfDay.filter(med => med.checked == true).map(val => val.code);
+
     if (medicineTime.length > 0) {
-      this.medicineDetailsForm.patchValue({ 'timeOfDay': medicineTime })
+      this.medicineDetailsForm.patchValue({ 'timeOfDay': medicineTime });
+      this.timeOfDay.forEach((item) => {
+        this.medicineDetailsForm.get(item.code.toLowerCase())?.addValidators(Validators.required);
+      });
     } else {
       this.medicineDetailsForm.patchValue({ 'timeOfDay': "" })
+      this.timeOfDay.forEach((item) => {
+        this.medicineDetailsForm.get(item.code.toLowerCase())?.removeValidators(Validators.required);
+      });
     }
   }
 
@@ -151,6 +166,10 @@ export class MedicineDetailsComponent implements OnInit {
     medicine.timeOfDay = form.get('timeOfDay')?.value;
     medicine.medStartDate = form.get('startDate')?.value;
     medicine.medEndDate = form.get('endDate')?.value;
+    medicine.morning = form.get('morning')?.value;
+    medicine.afternoon = form.get('afternoon')?.value;
+    medicine.evening = form.get('evening')?.value;
+    medicine.night = form.get('night')?.value;
     return medicine;
   }
 
@@ -169,33 +188,31 @@ export class MedicineDetailsComponent implements OnInit {
       orientation: 'portrait',
     };
 
-      this.barcodeScanner.scan(options).then(barcodeData => {
-      console.log('Barcode data', barcodeData);
+    this.barcodeScanner.scan(options).then(barcodeData => {
 
       const GTINStartIndex = barcodeData.text.indexOf("01");
-      if(GTINStartIndex == 0){
+      if (GTINStartIndex == 0) {
         const id01Value = barcodeData.text.substring(2, 16);
 
-      const ExpiryDateStartIndex = barcodeData.text.indexOf("17");
-      if(ExpiryDateStartIndex == 16)
-      {
-      const id17Value = barcodeData.text.substring(18,24);
+        const ExpiryDateStartIndex = barcodeData.text.indexOf("17");
+        if (ExpiryDateStartIndex == 16) {
+          const id17Value = barcodeData.text.substring(18, 24);
 
-      let medName = this.medicineNameMap.find((val) => val.GTIN == id01Value);
-      this.medicineDetailsForm.patchValue({'name':medName?.name});
+          let medName = this.medicineNameMap.find((val) => val.GTIN == id01Value);
+          this.medicineDetailsForm.patchValue({ 'name': medName?.name });
 
-      let expDate = moment("20"+id17Value).format("yyyy-MM-DD");
-      this.medicineDetailsForm.patchValue({'expiry':expDate});
+          let expDate = moment("20" + id17Value).format("yyyy-MM-DD");
+          this.medicineDetailsForm.patchValue({ 'expiry': expDate });
+        }
+        else {
+          this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
+        }
       }
-      else{
-        this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
-      }
-      }
-      else{
+      else {
         this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.DATA_MATRIX_NOT_FOUND"));
       }
     }).catch(err => {
-      console.log('Error', err);
+      this.toastService.showToast('bottom', this.translateService.instant("MEDICINE_DETAILS.UNABLE_TO_SCAN"));
     });
   }
 

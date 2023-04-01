@@ -6,5 +6,8 @@ export class Medicine {
     medStartDate: string;
     medEndDate: string;
     taken: boolean;
-    GTIN: string;
+    morning: string;
+    afternoon: string;
+    evening: string;
+    night: string;
   }

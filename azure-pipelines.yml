@@ -40,7 +40,7 @@ stages:
             displayName: 'Build Android Project'
             
           - script: |
-              sed -i '' 's/compile(\b)/implementation/g' /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
+              sed -i '' 's/compile(\b)/implementation/g' $(Build.SourcesDirectory)/$(projectName)/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
             displayName: 'Replace compile with implementation in build.gradle files'  
 
           - task: Bash@3

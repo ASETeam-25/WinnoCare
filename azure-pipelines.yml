@@ -1,6 +1,7 @@
 trigger:
 - main
 
+
 variables:
   projectName: 'Winnocare'
 

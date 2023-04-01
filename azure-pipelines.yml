@@ -28,10 +28,6 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/$(projectName)'
               command: install
             displayName: 'NPM Install'
-          
-          - script: |
-              sed -i '' 's/compile(\b)/implementation/g' /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
-            displayName: 'Replace compile with implementation in build.gradle files'
            
           - powershell: |
               ionic cap build android --no-open
@@ -42,6 +38,10 @@ stages:
               ./gradlew assemble$(buildConfiguration)
             workingDirectory: $(Build.SourcesDirectory)/$(projectName)
             displayName: 'Build Android Project'
+            
+          - script: |
+              sed -i '' 's/compile(\b)/implementation/g' /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
+            displayName: 'Replace compile with implementation in build.gradle files'  
 
           - task: Bash@3
             inputs:

@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'FAQ.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+  <ion-content>
+    <div class="dashboard-container">
+      <ion-card>
+        <div class="div-img-container">
+          <img alt="Books" class="img-category" src="assets\img\books3.png" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{'FAQ.READBOOKS' | translate}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{'FAQ.READBOOKSDES' | translate}}
+        </ion-card-content>
+        <ion-button [href]="'https://www.readanybook.com/'" fill="clear">{{'FAQ.READMORE' | translate}}</ion-button>
+    </ion-card>
+
+    <ion-card>
+        <div class="div-img-container">
+          <img alt="Books" class="img-category" src="assets\img\moviecam2.png" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{'FAQ.WATCHANIMETITLE' | translate}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{'FAQ.WATCHANIMEDES' | translate}}
+        </ion-card-content>
+        <ion-button [href]="'https://www.viz.com/shonenjump'" fill="clear">{{'FAQ.WATCHANIMEBTN' | translate}}</ion-button>
+    </ion-card>
+
+    <ion-card>
+        <div class="div-img-container">
+          <img alt="Books" class="img-category" src="assets\img\reddit1.png" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{'FAQ.REDDIT' | translate}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{'FAQ.REDDITDES' | translate}}
+        </ion-card-content>
+        <ion-button [href]="'https://www.reddit.com/r/lifehacks/top/?t=all'" fill="clear">{{'FAQ.REDDITBTN' | translate}}</ion-button>
+    </ion-card>
+
+    <ion-card>
+        <div class="div-img-container">
+          <img alt="Books" class="img-category" src="assets\img\treasureico.png" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{'FAQ.EDURESOURCES' | translate}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{'FAQ.EDURESOURCESDES' | translate}}
+        </ion-card-content>
+        <ion-button [href]="'https://freelearninglist.org/'" fill="clear">{{'FAQ.EDURESOURCESBTN' | translate}}</ion-button>
+    </ion-card>
+
+    <ion-card>
+        <div class="div-img-container">
+          <img alt="Books" class="img-category" src="assets\img\mh4.png" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{'FAQ.MHEALTH' | translate}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{'FAQ.MHEALTHDES' | translate}}
+        </ion-card-content>
+        <ion-button [href]="'http://counsellinginfrance.com/'" fill="clear">{{'FAQ.MHEALTHBTN' | translate}}</ion-button>
+    </ion-card>
+    </div>
+  </ion-content>

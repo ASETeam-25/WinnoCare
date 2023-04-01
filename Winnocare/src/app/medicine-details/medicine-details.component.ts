@@ -28,10 +28,10 @@ export class MedicineDetailsComponent implements OnInit {
   existingDosage = [];
 
   timeOfDay = [
-    { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), "checked": false, time: "" },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), "checked": false, time: "" },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), "checked": false, time: "" },
-    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"), "checked": false, time: "" }
+    { "value": this.translateService.instant("MEDICINE_DETAILS.MORNING"), code: "Morning", "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.AFTERNOON"), code:"Afternoon", "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.EVENING"), code:"Evening", "checked": false, time: "" },
+    { "value": this.translateService.instant("MEDICINE_DETAILS.NIGHT"),code:"Night", "checked": false, time: "" }
   ];
 
   medicineNameMap = [
@@ -76,14 +76,14 @@ export class MedicineDetailsComponent implements OnInit {
           endDate: medicineData.medEndDate,
           taken: [false]
         });
-        this.timeOfDay.filter(o1 => medicineData.timeOfDay.some(o2 => o1.value === o2)).map(val => val.checked = true);
+        this.timeOfDay.filter(o1 => medicineData.timeOfDay.some(o2 => o1.code === o2)).map(val => val.checked = true);
       }
     }
   }
 
   updateTimeOfDay(event) {
     event.checked = !event.checked;
-    let medicineTime = this.timeOfDay.filter(med => med.checked == true).map(val => val.value);
+    let medicineTime = this.timeOfDay.filter(med => med.checked == true).map(val => val.code);
     if (medicineTime.length > 0) {
       this.medicineDetailsForm.patchValue({ 'timeOfDay': medicineTime })
     } else {
@@ -155,7 +155,7 @@ export class MedicineDetailsComponent implements OnInit {
   }
 
   timeSelected(event: any, time: any) {
-    this.timeOfDay.filter((item) => item.value == time.value).map((val) => val.time = event.detail.value);
+    this.timeOfDay.filter((item) => item.code == time.code).map((val) => val.time = event.detail.value);
   }
 
   scanBarcode() {

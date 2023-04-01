@@ -10,10 +10,10 @@ import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  templateUrl: './faq-module.component.html',
+  styleUrls: ['./faq-module.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class FAQComponent implements OnInit {
 
   private subscription: Subscription;
   disableSosBtn: boolean = false;

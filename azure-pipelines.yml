@@ -39,7 +39,8 @@ stages:
             displayName: 'Build Android Project'
 
           - script:
-              sed 's/compile(/implementation(/g' /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle > /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner_new.gradle mv /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner_new.gradle /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
+              sed 's/compile(/implementation(/g' /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle > /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner_new.gradle 
+              mv /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner_new.gradle /Users/ridham_patel/myagent/_work/1/s/Winnocare/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
             displayName: 'Replace compile with implementation in barcodescanner.gradle file' 
 
           - task: Bash@3

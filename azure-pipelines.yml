@@ -24,7 +24,7 @@ stages:
             displayName: 'Install Ionic CLI'
         
           - script: |
-              sed -i '' 's/compile(\b)/implementation/g' $(Build.SourcesDirectory)/$(projectName)/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
+              sed -i 's/compile(/implementation(/g' $(Build.SourcesDirectory)/$(projectName)/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
             displayName: 'Replace compile with implementation in build.gradle files'
           
           - task: Npm@1

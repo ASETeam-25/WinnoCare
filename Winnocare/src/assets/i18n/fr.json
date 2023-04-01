@@ -189,5 +189,25 @@
         "TIME_OF_DAY": "Veuillez sélectionner l'heure de la journée.",
         "START_DATE": "Veuillez sélectionner la date de début.",
         "END_DATE": "Veuillez sélectionner la date de fin."
+    },
+    "FAQ":{
+            "TITLE":"Ressources",
+			"SUBTITLE":"Quelques trucs utiles",
+			"NAV_TEXT":"Aller",
+            "READMORE":"Lire un livre",
+			"READBOOKS":"Lire un livre fantastique",
+			"READBOOKSDES":"Parcourez une bibliothèque en ligne de livres gratuits à lire",
+			"WATCHANIMETITLE":"Regarder l'anime",
+			"WATCHANIMEDES":"Nous savons que vous aimez les anime, mais chaque anime n'est pas sur Netflix",
+			"WATCHANIMEBTN":"Regardez des anime qui ne sont pas sur Netflix",
+			"REDDIT":"Pas Reddit",
+			"REDDITDES":"Mais un Subreddit pour Hack de la vie",
+			"REDDITBTN":"Découvrez quelques Hack de la vie",
+			"EDURESOURCES":"Ressources utiles",
+			"EDURESOURCESDES":"Ressources sous Ressources? C'EST CETTE INCEPTION !!???",
+			"EDURESOURCESBTN":"Celui-ci est plutôt cool, croyez-moi.",
+			"MHEALTH":"Soutien en santé mentale",
+			"MHEALTHDES":"Vous vous sentez bien aujourd'hui?",
+			"MHEALTHBTN":"Quelques liens utiles pour votre santé mentale"
     }
 }

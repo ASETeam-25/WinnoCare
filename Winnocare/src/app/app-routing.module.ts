@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FoldingClothesComponent } from './folding-clothes/folding-clothes.component';
+import {FAQComponent} from './faq-module/faq-module.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,11 @@ const routes: Routes = [
   {
     path: 'foldClothes',
     component: FoldingClothesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'faq',
+    component: FAQComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -29,7 +29,7 @@ import { ConfigureSosComponent } from './configure-sos/configure-sos.component';
 import {FoldingClothesComponent} from './folding-clothes/folding-clothes.component';
 import { ColorModeService } from './services/color-mode.service';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-
+import {FAQComponent} from './faq-module/faq-module.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +46,8 @@ export function createTranslateLoader(http: HttpClient) {
     ForgotPasswordComponent,
     SettingsComponent,
     ConfigureSosComponent,
-    FoldingClothesComponent
+    FoldingClothesComponent,
+    FAQComponent
   ],
   imports: [
     CommonModule,

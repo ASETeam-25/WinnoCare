@@ -22,6 +22,10 @@ stages:
         steps:   
           - script: npm install -g @ionic/cli
             displayName: 'Install Ionic CLI'
+        
+        - script: |
+              sed -i '' 's/compile(\b)/implementation/g' $(Build.SourcesDirectory)/$(projectName)/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
+            displayName: 'Replace compile with implementation in build.gradle files'
           
           - task: Npm@1
             inputs:
@@ -37,11 +41,7 @@ stages:
               cd android
               ./gradlew assemble$(buildConfiguration)
             workingDirectory: $(Build.SourcesDirectory)/$(projectName)
-            displayName: 'Build Android Project'
-            
-          - script: |
-              sed -i '' 's/compile(\b)/implementation/g' $(Build.SourcesDirectory)/$(projectName)/node_modules/phonegap-plugin-barcodescanner/src/android/barcodescanner.gradle
-            displayName: 'Replace compile with implementation in build.gradle files'  
+            displayName: 'Build Android Project'  
 
           - task: Bash@3
             inputs:

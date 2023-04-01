@@ -27,7 +27,7 @@
 		"LOGGING_IN": "Logging in...",
 		"LOGIN_FAILED": "Login Failed. Please check username and password.",
 		"ENTER_PASSWORD": "Enter password",
-    "FOLDING_CLOTHES":"Folding Clothes"
+		"FOLDING_CLOTHES": "Folding Clothes"
 	},
 	"REGISTER": {
 		"REGISTER": "Register",
@@ -93,8 +93,8 @@
 		"USER_NOT_FOUND": "User not found. SOS will be disabled.",
 		"EMERGENCY_CONTACT_FAILED": "Unable to get default emergency contact.",
 		"ENABLE": "Enable",
-    "FOLDING_CLOTHES" :"Folding Clothes",
-    "FOLDING_CLOTHES_DESCRIPTION":"Clothes folding through Arduino board."
+		"FOLDING_CLOTHES": "Folding Clothes",
+		"FOLDING_CLOTHES_DESCRIPTION": "Clothes folding through Arduino board."
 	},
 	"CONFIGURE_SOS": {
 		"CONFIGURE_SOS": "Configure SOS",
@@ -150,9 +150,10 @@
 		"MEDICINE_NOT_FOUND": "Medicine details not found. Please try again later.",
 		"CANNOT_UPDATE_MEDICINE": "Failed to update medicine details. Please try again later.",
 		"TIME": "{{timeOfDay}} Time",
-    "SCAN": "Scan",
-    "DATA_MATRIX_NOT_FOUND":"Not a valid GS1 Data Matrix.",
-    "PLACE_BARCODE":"Place a barcode inside the scan area."
+		"SCAN": "Scan",
+		"DATA_MATRIX_NOT_FOUND": "Not a valid GS1 Data Matrix.",
+		"PLACE_BARCODE": "Place a barcode inside the scan area.",
+		"UNABLE_TO_SCAN": "Unable to scan. Please try again later."
 	},
 	"ERROR": {
 		"USERNAME": "Please enter username.",
@@ -189,24 +190,24 @@
 		"START_DATE": "Please select start date.",
 		"END_DATE": "Please select end date."
 	},
-    "FAQ":{
-      "TITLE":"Resources",
-			"SUBTITLE":"Some useful resources to kill Boredom",
-			"NAV_TEXT":"Give it a Go!",
-			"READMORE":"Read More",
-			"READBOOKS":"Read Some Books",
-			"READBOOKSDES":"Browse through an online library of free to read books",
-			"WATCHANIMETITLE":"Watch Anime",
-			"WATCHANIMEDES":"We know you like Anime, but each anime is not on Netflix",
-			"WATCHANIMEBTN":"Watch Anime that are not on Netflix",
-			"REDDIT":"Not Reddit",
-			"REDDITDES":"But a Subreddit for Lifehacks",
-			"REDDITBTN":"Explore some Lifehacks",
-			"EDURESOURCES":"Useful Resources",
-			"EDURESOURCESDES":"Resources under Resources? IS THIS INCEPTION!!???",
-			"EDURESOURCESBTN":"This one is pretty cool, trust me.",
-			"MHEALTH":"Mental Health Support",
-			"MHEALTHDES":"Are you feeling fine today?",
-			"MHEALTHBTN":"Some useful links for your Mental Health"
-    }
+	"FAQ": {
+		"TITLE": "Resources",
+		"SUBTITLE": "Some useful resources to kill Boredom",
+		"NAV_TEXT": "Give it a Go!",
+		"READMORE": "Read More",
+		"READBOOKS": "Read Some Books",
+		"READBOOKSDES": "Browse through an online library of free to read books",
+		"WATCHANIMETITLE": "Watch Anime",
+		"WATCHANIMEDES": "We know you like Anime, but each anime is not on Netflix",
+		"WATCHANIMEBTN": "Watch Anime that are not on Netflix",
+		"REDDIT": "Not Reddit",
+		"REDDITDES": "But a Subreddit for Lifehacks",
+		"REDDITBTN": "Explore some Lifehacks",
+		"EDURESOURCES": "Useful Resources",
+		"EDURESOURCESDES": "Resources under Resources? IS THIS INCEPTION!!???",
+		"EDURESOURCESBTN": "This one is pretty cool, trust me.",
+		"MHEALTH": "Mental Health Support",
+		"MHEALTHDES": "Are you feeling fine today?",
+		"MHEALTHBTN": "Some useful links for your Mental Health"
+	}
 }

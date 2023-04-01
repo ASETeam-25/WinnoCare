@@ -28,7 +28,11 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/$(projectName)'
               command: install
             displayName: 'NPM Install'
-
+          
+          - script: |
+              find . -name 'build.gradle' -type f -exec sed -i 's/compile(\b)/implementation/g' {} +
+            displayName: 'Replace compile with implementation in build.gradle files'
+           
           - powershell: |
               ionic cap build android --no-open
               npx cap copy android
